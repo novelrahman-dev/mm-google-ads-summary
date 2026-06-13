@@ -163,7 +163,7 @@ function fmtDate(iso) {
 
 // ─── ANTHROPIC API CALL ──────────────────────────────────────────────────────
 async function callClaude(prompt) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const res = await fetch('https://mm-ads-proxy.novel-rahman.workers.dev/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
