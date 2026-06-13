@@ -7,23 +7,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
   :root {
-    --bg: #f8f7f4; --surface: #ffffff; --border: rgba(0,0,0,0.10); --border-strong: rgba(0,0,0,0.18);
-    --text: #1a1a18; --muted: #6b6b67; --hint: #9b9b96; --radius: 10px;
+    --bg:#f8f7f4;--surface:#ffffff;--border:rgba(0,0,0,0.10);--border-strong:rgba(0,0,0,0.18);
+    --text:#1a1a18;--muted:#6b6b67;--hint:#9b9b96;--radius:10px;
     --purple-bg:#EEEDFE;--purple-text:#3C3489;--teal-bg:#E1F5EE;--teal-text:#085041;
     --amber-bg:#FAEEDA;--amber-text:#633806;--coral-bg:#FAECE7;--coral-text:#993C1D;
     --green-bg:#EAF3DE;--green-text:#27500A;--red-bg:#FCEBEB;--red-text:#A32D2D;--blue-bg:#E6F1FB;--blue-text:#0C447C;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;}
-  header{background:var(--surface);border-bottom:0.5px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+  header{background:var(--surface);border-bottom:.5px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
   header h1{font-size:15px;font-weight:500;}
   #last-updated{font-size:12px;color:var(--muted);}
-  .tabs{display:flex;border-bottom:0.5px solid var(--border);background:var(--surface);padding:0 24px;}
-  .tab{padding:10px 18px;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:color .15s;white-space:nowrap;}
-  .tab:hover{color:var(--text);}
-  .tab.active{color:var(--text);border-bottom-color:var(--text);font-weight:500;}
-  .page{display:none;padding:20px 24px;max-width:1200px;margin:0 auto;}
-  .page.active{display:block;}
+  .tabs{display:flex;border-bottom:.5px solid var(--border);background:var(--surface);padding:0 24px;}
+  .tab{padding:10px 18px;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-.5px;transition:color .15s;white-space:nowrap;}
+  .tab:hover{color:var(--text);}.tab.active{color:var(--text);border-bottom-color:var(--text);font-weight:500;}
+  .page{display:none;padding:20px 24px;max-width:1200px;margin:0 auto;}.page.active{display:block;}
   .loading{display:flex;align-items:center;justify-content:center;min-height:300px;flex-direction:column;gap:12px;}
   .spinner{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--text);border-radius:50%;animation:spin .8s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
@@ -32,57 +30,41 @@
   .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
   .stat{background:var(--bg);border-radius:8px;padding:12px 14px;}
   .stat-label{font-size:11px;color:var(--muted);margin-bottom:4px;}
-  .stat-value{font-size:22px;font-weight:500;}
-  .stat-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+  .stat-value{font-size:22px;font-weight:500;}.stat-sub{font-size:11px;color:var(--muted);margin-top:2px;}
   .section-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:20px 0 8px;}
-  .tbl-wrap{overflow-x:auto;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);}
+  .tbl-wrap{overflow-x:auto;background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);}
   table{width:100%;border-collapse:collapse;font-size:12px;}
-  thead th{font-size:10px;font-weight:500;color:var(--muted);padding:8px 10px;border-bottom:0.5px solid var(--border);text-align:right;white-space:nowrap;}
+  thead th{font-size:10px;font-weight:500;color:var(--muted);padding:8px 10px;border-bottom:.5px solid var(--border);text-align:right;white-space:nowrap;}
   thead th.left{text-align:left;}
-  tbody td{padding:8px 10px;border-bottom:0.5px solid var(--border);text-align:right;white-space:nowrap;}
+  tbody td{padding:8px 10px;border-bottom:.5px solid var(--border);text-align:right;white-space:nowrap;}
   tbody td.left{text-align:left;}
-  tbody tr:last-child td{border-bottom:none;}
-  tbody tr:hover{background:var(--bg);}
+  tbody tr:last-child td{border-bottom:none;}tbody tr:hover{background:var(--bg);}
   tfoot td{padding:8px 10px;text-align:right;font-weight:500;font-size:12px;border-top:1px solid var(--border-strong);background:var(--bg);}
   tfoot td.left{text-align:left;}
-  .agg-row td{background:var(--bg);font-weight:500;padding:9px 10px;text-align:right;border-bottom:0.5px solid var(--border);}
-  .agg-row td.left{text-align:left;}
-  .agg-row.final td{border-top:1.5px solid var(--border-strong);border-bottom:none;}
+  .agg-row td{background:var(--bg);font-weight:500;padding:9px 10px;text-align:right;border-bottom:.5px solid var(--border);}
+  .agg-row td.left{text-align:left;}.agg-row.final td{border-top:1.5px solid var(--border-strong);border-bottom:none;}
   .fh{background:var(--purple-bg);color:var(--purple-text);font-size:10px;font-weight:500;}
   .cnvh{background:var(--amber-bg);color:var(--amber-text);font-size:10px;font-weight:500;}
   .ch{background:var(--coral-bg);color:var(--coral-text);font-size:10px;font-weight:500;}
   .kh{background:var(--teal-bg);color:var(--teal-text);font-size:10px;font-weight:500;}
   .badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;}
-  .b-search{background:var(--blue-bg);color:var(--blue-text);}
-  .b-pmax{background:var(--purple-bg);color:var(--purple-text);}
-  .b-new{background:var(--green-bg);color:var(--green-text);}
-  .good{color:#3B6D11;} .warn{color:#BA7517;} .muted-val{color:var(--hint);}
+  .b-search{background:var(--blue-bg);color:var(--blue-text);}.b-pmax{background:var(--purple-bg);color:var(--purple-text);}.b-new{background:var(--green-bg);color:var(--green-text);}
+  .good{color:#3B6D11;}.warn{color:#BA7517;}.muted-val{color:var(--hint);}
   .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle;}
-  .insight-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;}
-  .insight-card.c-green{border-left:3px solid #639922;}
-  .insight-card.c-red{border-left:3px solid #E24B4A;}
-  .insight-card.c-amber{border-left:3px solid #BA7517;}
-  .insight-card.c-blue{border-left:3px solid #378ADD;}
-  .card-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
-  .card-title{font-size:13px;font-weight:500;margin-bottom:4px;}
-  .card-detail{font-size:12px;color:var(--muted);line-height:1.55;}
+  .insight-card{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;}
+  .insight-card.c-green{border-left:3px solid #639922;}.insight-card.c-red{border-left:3px solid #E24B4A;}.insight-card.c-amber{border-left:3px solid #BA7517;}.insight-card.c-blue{border-left:3px solid #378ADD;}
+  .card-icon{font-size:18px;flex-shrink:0;margin-top:1px;}.card-title{font-size:13px;font-weight:500;margin-bottom:4px;}.card-detail{font-size:12px;color:var(--muted);line-height:1.55;}
   .card-detail strong{font-weight:500;color:var(--text);}
   .ibadge{display:inline-block;font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;margin-left:6px;vertical-align:middle;}
-  .b-red{background:var(--red-bg);color:var(--red-text);}
-  .b-green{background:var(--green-bg);color:var(--green-text);}
-  .b-amber{background:var(--amber-bg);color:var(--amber-text);}
-  .b-blue{background:var(--blue-bg);color:var(--blue-text);}
+  .b-red{background:var(--red-bg);color:var(--red-text);}.b-green{background:var(--green-bg);color:var(--green-text);}.b-amber{background:var(--amber-bg);color:var(--amber-text);}.b-blue{background:var(--blue-bg);color:var(--blue-text);}
   .pacing-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:6px;}
-  .pacing-day{text-align:center;}
-  .pacing-lbl{font-size:10px;color:var(--muted);margin-bottom:4px;}
+  .pacing-day{text-align:center;}.pacing-lbl{font-size:10px;color:var(--muted);margin-bottom:4px;}
   .pacing-bar-wrap{height:52px;display:flex;align-items:flex-end;justify-content:center;}
-  .pacing-bar{width:26px;border-radius:3px 3px 0 0;}
-  .pacing-spend{font-size:10px;font-weight:500;margin-top:4px;}
-  .pacing-delta{font-size:10px;margin-top:1px;}
+  .pacing-bar{width:26px;border-radius:3px 3px 0 0;}.pacing-spend{font-size:10px;font-weight:500;margin-top:4px;}.pacing-delta{font-size:10px;margin-top:1px;}
   .bottom-line{background:var(--bg);border-radius:var(--radius);padding:14px 16px;font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px;}
   .bottom-line strong{color:var(--text);font-weight:500;}
-  .divider{height:0.5px;background:var(--border);margin:20px 0;}
-  .chart-wrap{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;}
+  .divider{height:.5px;background:var(--border);margin:20px 0;}
+  .chart-wrap{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;}
   .chart-inner{position:relative;width:100%;height:220px;}
   .chart-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:10px;}
   .chart-legend span{display:flex;align-items:center;gap:5px;}
@@ -100,251 +82,125 @@
   <div class="tab" onclick="showTab('campaigns')">📊 Campaigns &amp; Time Periods</div>
   <div class="tab" onclick="showTab('funnel')">🌐 Site Funnel</div>
 </div>
-
 <div id="tab-insights" class="page active">
-  <div class="loading" id="loading-insights"><div class="spinner"></div><div class="loading-msg">Pulling yesterday's data…</div></div>
+  <div class="loading" id="loading-insights"><div class="spinner"></div><div class="loading-msg">Loading…</div></div>
   <div id="content-insights" style="display:none"></div>
 </div>
 <div id="tab-campaigns" class="page">
-  <div class="loading" id="loading-campaigns"><div class="spinner"></div><div class="loading-msg">Loading campaign data…</div></div>
+  <div class="loading" id="loading-campaigns"><div class="spinner"></div><div class="loading-msg">Loading…</div></div>
   <div id="content-campaigns" style="display:none"></div>
 </div>
 <div id="tab-funnel" class="page">
-  <div class="loading" id="loading-funnel"><div class="spinner"></div><div class="loading-msg">Loading site funnel…</div></div>
+  <div class="loading" id="loading-funnel"><div class="spinner"></div><div class="loading-msg">Loading…</div></div>
   <div id="content-funnel" style="display:none"></div>
 </div>
 
 <script>
-// ── TAB NAV ─────────────────────────────────────────────────────────────────
-function showTab(name) {
+function showTab(name){
   const tabs=['insights','campaigns','funnel'];
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===name));
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
 }
-
-// ── DATE HELPERS ─────────────────────────────────────────────────────────────
-function daysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10);}
 function fmtDate(iso){return new Date(iso+'T12:00:00Z').toLocaleDateString('en-CA',{weekday:'short',month:'short',day:'numeric'});}
-
-// ── FORMAT HELPERS ───────────────────────────────────────────────────────────
 const n=v=>+(v||0);
-const fmt$=v=>v>0?'$'+Math.round(v).toLocaleString():'—';
+const fmt$=v=>n(v)>0?'$'+Math.round(n(v)).toLocaleString():'—';
 const fmtPct=(a,b)=>n(b)>0?(n(a)/n(b)*100).toFixed(1)+'%':'—';
-const fmtCpa=(cost,conv)=>n(conv)>0?'$'+Math.round(n(cost)/n(conv)).toLocaleString():'—';
-const fmtCvr=(conv,clicks)=>n(conv)>0&&n(clicks)>0?(n(conv)/n(clicks)*100).toFixed(2)+'%':'—';
+const fmtCpa=(c,v)=>n(v)>0?'$'+Math.round(n(c)/n(v)).toLocaleString():'—';
+const fmtCvr=(c,k)=>n(c)>0&&n(k)>0?(n(c)/n(k)*100).toFixed(2)+'%':'—';
 const fmtRoas=v=>n(v)>0?(n(v)/100).toFixed(2)+'x':'—';
-function cpaColor(cpa){if(!cpa||cpa==='—')return 'muted-val';const v=parseInt(cpa.replace(/[$,]/g,''));return v<=150?'good':v<=300?'':' warn';}
+function cpaColor(s){if(!s||s==='—')return 'muted-val';const v=parseInt(s.replace(/[$,]/g,''));return v<=150?'good':v<=300?'':'warn';}
 
-// ── API CALL ─────────────────────────────────────────────────────────────────
-async function callClaude(messages, systemPrompt) {
-  const body = {
-    model: 'claude-sonnet-4-6',
-    max_tokens: 4000,
-    system: systemPrompt || 'You are a data assistant. Always respond with valid JSON only — no markdown fences, no prose.',
-    mcp_servers: [
-      {type:'url',url:'https://mcp.windsor.ai',name:'windsor'},
-      {type:'url',url:'https://mcp.posthog.com/mcp',name:'posthog'}
-    ],
-    messages
-  };
-  const res = await fetch('https://mm-ads-proxy.novel-rahman.workers.dev/', {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify(body)
-  });
-  if(!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
-  const data = await res.json();
-  if(data.error) throw new Error(data.error.message||JSON.stringify(data.error));
-  // Extract text blocks
-  const textBlocks = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text);
-  const fullText = textBlocks.join('\n').trim();
-  return fullText;
-}
-
-// ── SAFE JSON PARSE ──────────────────────────────────────────────────────────
-function safeParseJSON(text) {
-  // Strip markdown fences
-  let s = text.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
-  // Find first { or [
-  const start = Math.min(
-    s.indexOf('{') >= 0 ? s.indexOf('{') : Infinity,
-    s.indexOf('[') >= 0 ? s.indexOf('[') : Infinity
-  );
-  if(start===Infinity) throw new Error('No JSON found in: '+s.slice(0,200));
-  s = s.slice(start);
-  // Find matching close
-  const opener = s[0], closer = opener==='{' ? '}' : ']';
-  let depth=0, i=0;
-  for(;i<s.length;i++){if(s[i]===opener)depth++;else if(s[i]===closer){depth--;if(depth===0){i++;break;}}}
-  return JSON.parse(s.slice(0,i));
-}
-
-// ── MAIN ─────────────────────────────────────────────────────────────────────
-async function loadDashboard() {
-  const yest=daysAgo(1), ago7=daysAgo(7), ago14=daysAgo(14), ago30=daysAgo(30);
-  document.getElementById('last-updated').textContent='Data for '+fmtDate(yest)+' · Loaded '+new Date().toLocaleTimeString('en-CA',{hour:'2-digit',minute:'2-digit'});
-  loadCampaigns(yest, ago7, ago14, ago30);
-  loadFunnel(ago30, ago14, ago7, yest);
-}
-
-// ════════════════════════════════════════════════════════════════════════════
-// CAMPAIGNS + TIME PERIODS
-// ════════════════════════════════════════════════════════════════════════════
-async function loadCampaigns(yest, ago7, ago14, ago30) {
+async function loadDashboard(){
   try {
-    const text = await callClaude([{role:'user',content:`
-Use Windsor.ai (connector: google_ads, account: 230-778-8239) and PostHog MCP tools to fetch this data, then return ONLY a single JSON object.
-
-WINDSOR CALLS NEEDED:
-1. date_from:"${yest}" date_to:"${yest}" fields:["campaign","campaign_type","impressions","clicks","cost","search_top_impression_share","roas"]
-2. date_from:"${yest}" date_to:"${yest}" fields:["campaign","conversion_action_name","conversions"]
-3. date_from:"${ago7}" date_to:"${yest}" fields:["date","impressions","clicks","cost","search_top_impression_share","roas"]
-4. date_from:"${ago7}" date_to:"${yest}" fields:["date","conversion_action_name","conversions"]
-5. date_from:"${ago14}" date_to:"${yest}" fields:["impressions","clicks","cost","roas"] — aggregate only
-6. date_from:"${ago14}" date_to:"${yest}" fields:["conversion_action_name","conversions"] — for [gtag] purchase count
-7. date_from:"${ago30}" date_to:"${yest}" fields:["impressions","clicks","cost","roas"] — aggregate only
-8. date_from:"${ago30}" date_to:"${yest}" fields:["conversion_action_name","conversions"] — for [gtag] purchase count
-
-POSTHOG QUERY (execute via PostHog MCP execute-sql tool):
-SELECT toDate(timestamp) AS day, event, count() AS cnt
-FROM events
-WHERE timestamp >= toDate('${ago7}') AND timestamp < toDate('${yest}') + INTERVAL 1 DAY
-  AND properties.utm_source = 'google_paid'
-  AND event IN ('booking_initial_assessment_clicked','booking_form_submitted','booking_payment_completed')
-GROUP BY day, event ORDER BY day
-
-RULES:
-- For purch fields: only count rows where conversion_action_name = "[gtag] purchase"
-- roas from Windsor is pre-multiplied by 100 — pass through as-is
-- appts/forms/ph_purch for each campaign/day: pull from PostHog where utm_campaign matches campaign name
-
-Return EXACTLY this JSON structure with real numbers:
-{
-  "campaigns": [
-    {"campaign":"CAMPAIGN_NAME","type":"SEARCH or PERFORMANCE_MAX","impr":0,"clicks":0,"cost":0.0,"top_is":0.0,"roas":0,"purch":0.0,"appts":0,"forms":0,"ph_purch":0}
-  ],
-  "daily": [
-    {"date":"YYYY-MM-DD","impr":0,"clicks":0,"cost":0.0,"top_is":0.0,"roas":0,"purch":0.0,"appts":0,"forms":0,"ph_purch":0}
-  ],
-  "agg14": {"impr":0,"clicks":0,"cost":0.0,"roas":0,"purch":0.0},
-  "agg30": {"impr":0,"clicks":0,"cost":0.0,"roas":0,"purch":0.0}
-}
-`}]);
-
-    let raw;
-    try { raw = safeParseJSON(text); }
-    catch(e) { throw new Error('JSON parse failed.\n\nResponse was:\n'+text.slice(0,500)); }
-
-    // Ensure arrays exist
-    const data = {
-      campaigns: Array.isArray(raw.campaigns) ? raw.campaigns : [],
-      daily: Array.isArray(raw.daily) ? raw.daily : [],
-      agg14: raw.agg14 || {},
-      agg30: raw.agg30 || {}
-    };
-
-    if(data.campaigns.length===0 && data.daily.length===0) {
-      throw new Error('Claude returned empty data arrays. Raw response:\n'+text.slice(0,400));
-    }
-
-    renderCampaigns(data, yest);
-    loadInsights(data, yest);
+    const res = await fetch('data.json?v='+Date.now());
+    if(!res.ok) throw new Error('data.json not found (HTTP '+res.status+'). The GitHub Action may not have run yet.');
+    const data = await res.json();
+    document.getElementById('last-updated').textContent =
+      'Data for ' + fmtDate(data.date) + ' · Refreshed ' + (data.generated_at||'today');
+    renderCampaigns(data);
+    renderFunnel(data);
+    renderInsights(data);
   } catch(e) {
-    const msg = e.message||String(e);
-    document.getElementById('loading-campaigns').innerHTML=`<div class="error-box">Campaign error:\n${msg}</div>`;
-    document.getElementById('loading-insights').innerHTML=`<div class="error-box">Insights error:\n${msg}</div>`;
+    const msg = e.message || String(e);
+    ['insights','campaigns','funnel'].forEach(tab=>{
+      document.getElementById('loading-'+tab).innerHTML=`<div class="error-box">${msg}</div>`;
+    });
   }
 }
 
-function renderCampaigns(data, yest) {
-  const {campaigns, daily, agg14, agg30} = data;
+// ═══════════════════════════════════════════════════════════════════
+// CAMPAIGNS
+// ═══════════════════════════════════════════════════════════════════
+function renderCampaigns(data){
+  const {campaigns=[], daily=[], agg14={}, agg30={}} = data;
+  const t7=daily.reduce((a,d)=>({impr:a.impr+n(d.impr),clicks:a.clicks+n(d.clicks),cost:a.cost+n(d.cost),purch:a.purch+n(d.purch),appts:a.appts+n(d.appts),forms:a.forms+n(d.forms)}),{impr:0,clicks:0,cost:0,purch:0,appts:0,forms:0});
+  const ty=campaigns.reduce((a,c)=>({cost:a.cost+n(c.cost),clicks:a.clicks+n(c.clicks),purch:a.purch+n(c.purch),impr:a.impr+n(c.impr)}),{cost:0,clicks:0,purch:0,impr:0});
 
-  const t7 = daily.reduce((a,d)=>({
-    impr:a.impr+n(d.impr),clicks:a.clicks+n(d.clicks),cost:a.cost+n(d.cost),
-    purch:a.purch+n(d.purch),appts:a.appts+n(d.appts),forms:a.forms+n(d.forms)
-  }),{impr:0,clicks:0,cost:0,purch:0,appts:0,forms:0});
-
-  const tyest = campaigns.reduce((a,c)=>({
-    cost:a.cost+n(c.cost),clicks:a.clicks+n(c.clicks),purch:a.purch+n(c.purch),impr:a.impr+n(c.impr)
-  }),{cost:0,clicks:0,purch:0,impr:0});
-
-  let html = `
-  <div class="stat-grid">
-    <div class="stat"><div class="stat-label">Yesterday spend</div><div class="stat-value">${fmt$(tyest.cost)}</div><div class="stat-sub">${fmtDate(yest)}</div></div>
-    <div class="stat"><div class="stat-label">Yesterday conv.</div><div class="stat-value">${n(tyest.purch).toFixed(1)}</div><div class="stat-sub">CPA ${fmtCpa(tyest.cost,tyest.purch)}</div></div>
+  let h=`<div class="stat-grid">
+    <div class="stat"><div class="stat-label">Yesterday spend</div><div class="stat-value">${fmt$(ty.cost)}</div><div class="stat-sub">${fmtDate(data.date)}</div></div>
+    <div class="stat"><div class="stat-label">Yesterday conv.</div><div class="stat-value">${n(ty.purch).toFixed(1)}</div><div class="stat-sub">CPA ${fmtCpa(ty.cost,ty.purch)}</div></div>
     <div class="stat"><div class="stat-label">7-day spend</div><div class="stat-value">${fmt$(t7.cost)}</div><div class="stat-sub">CPA ${fmtCpa(t7.cost,t7.purch)}</div></div>
     <div class="stat"><div class="stat-label">30-day CPA</div><div class="stat-value">${fmtCpa(agg30.cost,agg30.purch)}</div><div class="stat-sub">vs $100 target</div></div>
   </div>
-  <div class="section-label">Campaign summary — ${fmtDate(yest)}</div>
-  <div class="tbl-wrap"><table>
-    <thead><tr>
-      <th class="left" style="min-width:160px">Campaign</th>
-      <th class="left" style="width:60px">Type</th>
-      <th>Impr.</th><th>Clicks</th><th>CTR</th><th>CPC</th><th>Cost</th>
-      <th class="fh">Appts/Clicks</th><th class="fh">Forms/Appts</th><th class="fh">Purch/Forms</th>
-      <th class="cnvh">Conv.</th><th class="ch">CVR</th><th class="kh">Cost/Conv.</th>
-      <th>Top IS</th><th>ROAS</th>
-    </tr></thead><tbody>`;
+  <div class="section-label">Campaign summary — ${fmtDate(data.date)}</div>
+  <div class="tbl-wrap"><table><thead><tr>
+    <th class="left" style="min-width:160px">Campaign</th>
+    <th class="left" style="width:60px">Type</th>
+    <th>Impr.</th><th>Clicks</th><th>CTR</th><th>CPC</th><th>Cost</th>
+    <th class="fh">Appts/Clicks</th><th class="fh">Forms/Appts</th><th class="fh">Purch/Forms</th>
+    <th class="cnvh">Conv.</th><th class="ch">CVR</th><th class="kh">Cost/Conv.</th>
+    <th>Top IS</th><th>ROAS</th>
+  </tr></thead><tbody>`;
 
+  const NEW=['Clinique_Hormonotherapie','Competitors','Search_ON_AB','Search_CA_EN_Clinic','HRT_Treatments'];
   [...campaigns].sort((a,b)=>n(b.cost)-n(a.cost)).forEach(c=>{
-    const isPMax = (c.type||'').toUpperCase().includes('PERFORMANCE');
-    const typeTag = isPMax ? `<span class="badge b-pmax">PMax</span>` : `<span class="badge b-search">Search</span>`;
-    const newCamps = ['Clinique_Hormonotherapie','Competitors','Search_ON_AB','Search_CA_EN_Clinic','HRT_Treatments'];
-    const isNew = newCamps.some(k=>c.campaign.includes(k));
-    const newTag = isNew ? ` <span class="badge b-new">✦ new</span>` : '';
-    const short = c.campaign.replace(/Search_|_tCPA|_Max_clicks|_Max_conversion_value|\[NB\]/g,'').replace('[Brand]','Brand').trim().slice(0,45);
-    const topIs = n(c.top_is)>0 ? (n(c.top_is)*100).toFixed(1)+'%' : 'N/A';
-    const cpa = fmtCpa(c.cost,c.purch);
-    html += `<tr>
-      <td class="left">${short}${newTag}</td>
-      <td class="left">${typeTag}</td>
-      <td>${n(c.impr).toLocaleString()}</td>
-      <td>${n(c.clicks).toLocaleString()}</td>
+    const isPMax=(c.type||'').toUpperCase().includes('PERFORMANCE');
+    const typeTag=isPMax?`<span class="badge b-pmax">PMax</span>`:`<span class="badge b-search">Search</span>`;
+    const isNew=NEW.some(k=>c.campaign.includes(k));
+    const newTag=isNew?` <span class="badge b-new">✦ new</span>`:'';
+    const short=c.campaign.replace(/Search_|_tCPA|_Max_clicks|_Max_conversion_value|\[NB\]|\[Brand\]/g,'').replace('[Brand]','Brand').trim().slice(0,48);
+    const topIs=n(c.top_is)>0?(n(c.top_is)*100).toFixed(1)+'%':'N/A';
+    const cpa=fmtCpa(c.cost,c.purch);
+    h+=`<tr>
+      <td class="left">${short}${newTag}</td><td class="left">${typeTag}</td>
+      <td>${n(c.impr).toLocaleString()}</td><td>${n(c.clicks).toLocaleString()}</td>
       <td>${n(c.impr)>0?(n(c.clicks)/n(c.impr)*100).toFixed(2)+'%':'—'}</td>
       <td>${n(c.clicks)>0?'$'+(n(c.cost)/n(c.clicks)).toFixed(2):'—'}</td>
       <td>$${Math.round(n(c.cost)).toLocaleString()}</td>
-      <td>${fmtPct(c.appts,c.clicks)}</td>
-      <td>${fmtPct(c.forms,c.appts)}</td>
-      <td>${fmtPct(c.ph_purch,c.forms)}</td>
+      <td>${fmtPct(c.appts,c.clicks)}</td><td>${fmtPct(c.forms,c.appts)}</td><td>${fmtPct(c.ph_purch,c.forms)}</td>
       <td>${n(c.purch)>0?n(c.purch).toFixed(1):'—'}</td>
       <td>${fmtCvr(c.purch,c.clicks)}</td>
       <td class="${cpaColor(cpa)}">${cpa}</td>
-      <td class="${n(c.top_is)>0.8?'good':n(c.top_is)>0&&n(c.top_is)<0.4?'warn':''}">${topIs}</td>
+      <td class="${n(c.top_is)>=0.8?'good':n(c.top_is)>0&&n(c.top_is)<0.4?'warn':''}">${topIs}</td>
       <td class="${n(c.roas)/100>=1.5?'good':n(c.roas)>0&&n(c.roas)/100<1?'warn':''}">${fmtRoas(c.roas)}</td>
     </tr>`;
   });
-
-  html += `</tbody><tfoot><tr>
-    <td class="left">Total</td><td class="left"></td>
-    <td>${tyest.impr.toLocaleString()}</td><td>${tyest.clicks.toLocaleString()}</td>
-    <td>${tyest.impr>0?(tyest.clicks/tyest.impr*100).toFixed(2)+'%':'—'}</td>
-    <td>${tyest.clicks>0?'$'+(tyest.cost/tyest.clicks).toFixed(2):'—'}</td>
-    <td>$${Math.round(tyest.cost).toLocaleString()}</td>
+  h+=`</tbody><tfoot><tr>
+    <td class="left">Total</td><td></td>
+    <td>${ty.impr.toLocaleString()}</td><td>${ty.clicks.toLocaleString()}</td>
+    <td>${ty.impr>0?(ty.clicks/ty.impr*100).toFixed(2)+'%':'—'}</td>
+    <td>${ty.clicks>0?'$'+(ty.cost/ty.clicks).toFixed(2):'—'}</td>
+    <td>$${Math.round(ty.cost).toLocaleString()}</td>
     <td>—</td><td>—</td><td>—</td>
-    <td>${n(tyest.purch).toFixed(1)}</td>
-    <td>${fmtCvr(tyest.purch,tyest.clicks)}</td>
-    <td>${fmtCpa(tyest.cost,tyest.purch)}</td>
-    <td>—</td><td>—</td>
+    <td>${n(ty.purch).toFixed(1)}</td><td>${fmtCvr(ty.purch,ty.clicks)}</td>
+    <td>${fmtCpa(ty.cost,ty.purch)}</td><td>—</td><td>—</td>
   </tr></tfoot></table></div>
 
   <div class="section-label" style="margin-top:24px">Daily breakdown — last 7 days</div>
-  <div class="tbl-wrap"><table>
-    <thead><tr>
-      <th class="left" style="min-width:100px">Date</th>
-      <th>Impr.</th><th>Clicks</th><th>CTR</th><th>Avg CPC</th><th>Cost</th>
-      <th class="fh">Appts/Clicks</th><th class="fh">Forms/Appts</th><th class="fh">Purch/Forms</th>
-      <th class="cnvh">Conv.</th><th class="ch">CVR</th><th class="kh">Cost/Conv.</th><th>Top IS</th>
-    </tr></thead><tbody>`;
-
+  <div class="tbl-wrap"><table><thead><tr>
+    <th class="left" style="min-width:100px">Date</th>
+    <th>Impr.</th><th>Clicks</th><th>CTR</th><th>Avg CPC</th><th>Cost</th>
+    <th class="fh">Appts/Clicks</th><th class="fh">Forms/Appts</th><th class="fh">Purch/Forms</th>
+    <th class="cnvh">Conv.</th><th class="ch">CVR</th><th class="kh">Cost/Conv.</th><th>Top IS</th>
+  </tr></thead><tbody>`;
   daily.forEach(d=>{
-    const dow=new Date(d.date+'T12:00:00Z').getDay();
-    const isWknd=dow===0||dow===6;
-    const target=isWknd?2000:3250;
-    const over=n(d.cost)>target*1.2, under=n(d.cost)<target*0.8;
+    const dow=new Date(d.date+'T12:00:00Z').getDay(),isWknd=dow===0||dow===6;
+    const tgt=isWknd?2000:3250;
+    const over=n(d.cost)>tgt*1.2,under=n(d.cost)<tgt*0.8;
     const topIs=n(d.top_is)>0?(n(d.top_is)*100).toFixed(1)+'%':'N/A';
     const cpa=fmtCpa(d.cost,d.purch);
-    html+=`<tr>
+    h+=`<tr>
       <td class="left">${fmtDate(d.date)}</td>
       <td>${n(d.impr).toLocaleString()}</td><td>${n(d.clicks).toLocaleString()}</td>
       <td>${n(d.impr)>0?(n(d.clicks)/n(d.impr)*100).toFixed(2)+'%':'—'}</td>
@@ -353,186 +209,98 @@ function renderCampaigns(data, yest) {
       <td>${fmtPct(d.appts,d.clicks)}</td><td>${fmtPct(d.forms,d.appts)}</td><td>${fmtPct(d.ph_purch,d.forms)}</td>
       <td>${n(d.purch)>0?n(d.purch).toFixed(1):'—'}</td>
       <td>${fmtCvr(d.purch,d.clicks)}</td>
-      <td class="${cpaColor(cpa)}">${cpa}</td>
-      <td>${topIs}</td>
+      <td class="${cpaColor(cpa)}">${cpa}</td><td>${topIs}</td>
     </tr>`;
   });
-
-  html+=`</tbody><tfoot><tr>
+  h+=`</tbody><tfoot><tr>
     <td class="left">7-day total</td>
     <td>${t7.impr.toLocaleString()}</td><td>${t7.clicks.toLocaleString()}</td>
     <td>${t7.impr>0?(t7.clicks/t7.impr*100).toFixed(2)+'%':'—'}</td>
     <td>${t7.clicks>0?'$'+(t7.cost/t7.clicks).toFixed(2):'—'}</td>
     <td>$${Math.round(t7.cost).toLocaleString()}</td>
     <td>${fmtPct(t7.appts,t7.clicks)}</td><td>${fmtPct(t7.forms,t7.appts)}</td><td>${fmtPct(t7.ph_purch,t7.forms)}</td>
-    <td>${n(t7.purch).toFixed(1)}</td>
-    <td>${fmtCvr(t7.purch,t7.clicks)}</td>
+    <td>${n(t7.purch).toFixed(1)}</td><td>${fmtCvr(t7.purch,t7.clicks)}</td>
     <td>${fmtCpa(t7.cost,t7.purch)}</td><td>—</td>
   </tr></tfoot></table></div>
 
   <div class="section-label" style="margin-top:24px">Aggregate windows</div>
-  <div class="tbl-wrap"><table>
-    <thead><tr>
-      <th class="left">Period</th><th>Impr.</th><th>Clicks</th><th>CTR</th><th>Avg CPC</th><th>Cost</th>
-      <th class="cnvh">Conv.</th><th class="ch">CVR</th><th class="kh">Cost/Conv.</th>
-    </tr></thead><tbody>
-    ${[{label:'Last 14 days',d:agg14},{label:'Last 30 days',d:agg30,final:true}].map(({label,d,final})=>`
-    <tr class="agg-row${final?' final':''}">
-      <td class="left">${label}</td>
-      <td>${n(d.impr).toLocaleString()}</td><td>${n(d.clicks).toLocaleString()}</td>
-      <td>${n(d.clicks)>0?(n(d.clicks)/n(d.impr)*100).toFixed(2)+'%':'—'}</td>
-      <td>${n(d.clicks)>0?'$'+(n(d.cost)/n(d.clicks)).toFixed(2):'—'}</td>
-      <td>$${Math.round(n(d.cost)).toLocaleString()}</td>
-      <td>${n(d.purch).toFixed(1)}</td>
-      <td>${fmtCvr(d.purch,d.clicks)}</td>
-      <td class="${cpaColor(fmtCpa(d.cost,d.purch))}">${fmtCpa(d.cost,d.purch)}</td>
-    </tr>`).join('')}
-    </tbody></table></div>`;
+  <div class="tbl-wrap"><table><thead><tr>
+    <th class="left">Period</th><th>Impr.</th><th>Clicks</th><th>CTR</th><th>Avg CPC</th><th>Cost</th>
+    <th class="cnvh">Conv.</th><th class="ch">CVR</th><th class="kh">Cost/Conv.</th>
+  </tr></thead><tbody>
+  ${[{l:'Last 14 days',d:agg14},{l:'Last 30 days',d:agg30,f:true}].map(({l,d,f})=>`
+  <tr class="agg-row${f?' final':''}">
+    <td class="left">${l}</td>
+    <td>${n(d.impr).toLocaleString()}</td><td>${n(d.clicks).toLocaleString()}</td>
+    <td>${n(d.clicks)>0?(n(d.clicks)/n(d.impr)*100).toFixed(2)+'%':'—'}</td>
+    <td>${n(d.clicks)>0?'$'+(n(d.cost)/n(d.clicks)).toFixed(2):'—'}</td>
+    <td>$${Math.round(n(d.cost)).toLocaleString()}</td>
+    <td>${n(d.purch).toFixed(1)}</td><td>${fmtCvr(d.purch,d.clicks)}</td>
+    <td class="${cpaColor(fmtCpa(d.cost,d.purch))}">${fmtCpa(d.cost,d.purch)}</td>
+  </tr>`).join('')}
+  </tbody></table></div>`;
 
   document.getElementById('loading-campaigns').style.display='none';
-  document.getElementById('content-campaigns').innerHTML=html;
+  document.getElementById('content-campaigns').innerHTML=h;
   document.getElementById('content-campaigns').style.display='block';
 }
 
-// ════════════════════════════════════════════════════════════════════════════
-// SITE FUNNEL
-// ════════════════════════════════════════════════════════════════════════════
-async function loadFunnel(ago30, ago14, ago7, yest) {
-  try {
-    const text = await callClaude([{role:'user',content:`
-Use PostHog MCP execute-sql tool to run these HogQL queries, then return ONLY a JSON object.
-
-QUERY A — 30-day channel funnel:
-WITH channel_sessions AS (
-  SELECT person_id, properties.$session_id AS session_id,
-    multiIf(
-      properties.utm_source = 'google_paid','Google Paid',
-      properties.utm_source IN ('fb','facebook'),'Meta Paid',
-      properties.utm_medium IN ('Facebook_Mobile_Feed','Facebook_Desktop_Feed'),'Meta Paid',
-      properties.utm_source = 'ig','Meta Paid',
-      properties.utm_source = 'paid_social_media','Meta Paid',
-      properties.utm_source = 'bing','Bing Paid',
-      properties.utm_source = 'chatgpt.com','ChatGPT',
-      properties.utm_source IS NOT NULL AND properties.utm_source != '','Other Paid',
-      properties.$referring_domain = '$direct' OR properties.$referring_domain IS NULL,'Direct',
-      properties.$referring_domain LIKE '%google%','Organic Search',
-      properties.$referring_domain LIKE '%bing%','Organic Search',
-      properties.$referring_domain LIKE '%yahoo%','Organic Search',
-      properties.$referring_domain LIKE '%duckduckgo%','Organic Search',
-      properties.$referring_domain LIKE '%facebook%' OR properties.$referring_domain LIKE '%instagram%','Organic Social',
-      'Referral'
-    ) AS channel
-  FROM events WHERE timestamp >= toDate('${ago30}') AND timestamp < toDate('${yest}') + INTERVAL 1 DAY AND event = '$pageview'
-  GROUP BY person_id, session_id, channel
-),
-funnel_events AS (
-  SELECT person_id, properties.$session_id AS session_id,
-    countIf(event='booking_initial_assessment_clicked') AS appts,
-    countIf(event='booking_form_submitted') AS forms,
-    countIf(event='booking_payment_completed') AS purchases
-  FROM events WHERE timestamp >= toDate('${ago30}') AND timestamp < toDate('${yest}') + INTERVAL 1 DAY
-    AND event IN ('booking_initial_assessment_clicked','booking_form_submitted','booking_payment_completed')
-  GROUP BY person_id, session_id
-)
-SELECT cs.channel, count(DISTINCT cs.session_id) AS sessions,
-  countIf(fe.appts>0) AS appts, countIf(fe.forms>0) AS forms, countIf(fe.purchases>0) AS purchases
-FROM channel_sessions cs LEFT JOIN funnel_events fe ON cs.person_id=fe.person_id AND cs.session_id=fe.session_id
-GROUP BY cs.channel ORDER BY sessions DESC LIMIT 20
-
-QUERY B — 14-day daily all-channel funnel:
-SELECT toDate(timestamp) AS date,
-  count(DISTINCT if(event='$pageview', properties.$session_id, null)) AS sessions,
-  countIf(event='booking_initial_assessment_clicked') AS appts,
-  countIf(event='booking_form_submitted') AS forms,
-  countIf(event='booking_payment_completed') AS purchases
-FROM events
-WHERE timestamp >= toDate('${ago14}') AND timestamp < toDate('${yest}') + INTERVAL 1 DAY
-  AND event IN ('$pageview','booking_initial_assessment_clicked','booking_form_submitted','booking_payment_completed')
-GROUP BY date ORDER BY date LIMIT 30
-
-Return ONLY this JSON (no markdown, no prose):
-{
-  "channels": [{"channel":"string","sessions":0,"appts":0,"forms":0,"purchases":0}],
-  "daily14": [{"date":"YYYY-MM-DD","sessions":0,"appts":0,"forms":0,"purchases":0}]
-}
-`}]);
-
-    let raw;
-    try { raw = safeParseJSON(text); }
-    catch(e) { throw new Error('JSON parse failed.\n\nResponse was:\n'+text.slice(0,500)); }
-
-    const data = {
-      channels: Array.isArray(raw.channels) ? raw.channels : [],
-      daily14: Array.isArray(raw.daily14) ? raw.daily14 : []
-    };
-
-    renderFunnel(data, yest, ago7);
-  } catch(e) {
-    document.getElementById('loading-funnel').innerHTML=`<div class="error-box">Funnel error:\n${e.message}</div>`;
-  }
-}
-
-function renderFunnel(data, yest, ago7) {
-  const {channels, daily14} = data;
+// ═══════════════════════════════════════════════════════════════════
+// FUNNEL
+// ═══════════════════════════════════════════════════════════════════
+function renderFunnel(data){
+  const {channels=[], daily14=[]} = data;
   const colors={'Google Paid':'#378ADD','Direct':'#888780','Organic Search':'#1D9E75','Meta Paid':'#D4537E','Referral':'#EF9F27','Organic Social':'#AFA9EC','Bing Paid':'#B4B2A9','ChatGPT':'#97C459','Other Paid':'#D3D1C7'};
-
-  // Compute aggregates from daily14
-  const sumDaily=(arr,f)=>arr.reduce((a,d)=>a+n(d[f]),0);
+  const sd=(arr,f)=>arr.reduce((a,d)=>a+n(d[f]),0);
   const last7=daily14.slice(-7);
   const aggs=[
-    {label:'Yesterday ('+fmtDate(yest)+')',d:daily14[daily14.length-1]||{}},
-    {label:'Last 7 days',d:{sessions:sumDaily(last7,'sessions'),appts:sumDaily(last7,'appts'),forms:sumDaily(last7,'forms'),purchases:sumDaily(last7,'purchases')}},
-    {label:'Last 14 days',d:{sessions:sumDaily(daily14,'sessions'),appts:sumDaily(daily14,'appts'),forms:sumDaily(daily14,'forms'),purchases:sumDaily(daily14,'purchases')}},
+    {l:'Yesterday ('+fmtDate(data.date)+')',d:daily14[daily14.length-1]||{}},
+    {l:'Last 7 days',d:{sessions:sd(last7,'sessions'),appts:sd(last7,'appts'),forms:sd(last7,'forms'),purchases:sd(last7,'purchases')}},
+    {l:'Last 14 days',d:{sessions:sd(daily14,'sessions'),appts:sd(daily14,'appts'),forms:sd(daily14,'forms'),purchases:sd(daily14,'purchases')}},
   ];
 
-  let html=`
-  <div class="section-label">Site funnel by channel — last 30 days</div>
-  <div class="tbl-wrap"><table>
-    <thead><tr>
-      <th class="left" style="min-width:130px">Channel</th>
-      <th>Sessions</th><th>Purchases</th>
-      <th class="fh">Appts/Sessions</th><th class="fh">Forms/Appts</th><th class="fh">Purch/Forms</th>
-      <th class="ch">CVR</th>
-    </tr></thead><tbody>`;
-
+  let h=`<div class="section-label">Site funnel by channel — last 30 days</div>
+  <div class="tbl-wrap"><table><thead><tr>
+    <th class="left" style="min-width:130px">Channel</th>
+    <th>Sessions</th><th>Purchases</th>
+    <th class="fh">Appts/Sessions</th><th class="fh">Forms/Appts</th><th class="fh">Purch/Forms</th>
+    <th class="ch">CVR</th>
+  </tr></thead><tbody>`;
   channels.forEach(c=>{
     const cvr=n(c.sessions)>0?(n(c.purchases)/n(c.sessions)*100).toFixed(2)+'%':'—';
-    const badMeta=c.channel==='Meta Paid'&&n(c.sessions)>1000;
-    html+=`<tr>
+    const bad=c.channel==='Meta Paid'&&n(c.sessions)>1000;
+    h+=`<tr>
       <td class="left"><span class="dot" style="background:${colors[c.channel]||'#ccc'}"></span>${c.channel}</td>
       <td>${n(c.sessions).toLocaleString()}</td><td>${n(c.purchases).toLocaleString()}</td>
-      <td>${fmtPct(c.appts,c.sessions)}</td>
-      <td>${fmtPct(c.forms,c.appts)}</td>
-      <td class="${badMeta?'warn':''}">${fmtPct(c.purchases,c.forms)}</td>
-      <td class="${badMeta?'warn':''}">${cvr}</td>
+      <td>${fmtPct(c.appts,c.sessions)}</td><td>${fmtPct(c.forms,c.appts)}</td>
+      <td class="${bad?'warn':''}">${fmtPct(c.purchases,c.forms)}</td>
+      <td class="${bad?'warn':''}">${cvr}</td>
     </tr>`;
   });
-
   const totS=channels.reduce((a,c)=>a+n(c.sessions),0);
   const totP=channels.reduce((a,c)=>a+n(c.purchases),0);
   const totA=channels.reduce((a,c)=>a+n(c.appts),0);
   const totF=channels.reduce((a,c)=>a+n(c.forms),0);
-  html+=`</tbody><tfoot><tr>
+  h+=`</tbody><tfoot><tr>
     <td class="left">Total</td><td>${totS.toLocaleString()}</td><td>${totP.toLocaleString()}</td>
     <td>${fmtPct(totA,totS)}</td><td>${fmtPct(totF,totA)}</td><td>${fmtPct(totP,totF)}</td>
     <td>${totS>0?(totP/totS*100).toFixed(2)+'%':'—'}</td>
   </tr></tfoot></table></div>
 
-  <div class="section-label" style="margin-top:24px">Funnel time windows — all channels</div>
-  <div class="tbl-wrap"><table>
-    <thead><tr>
-      <th class="left" style="min-width:160px">Period</th>
-      <th>Sessions</th><th>Purchases</th>
-      <th class="fh">Appts/Sessions</th><th class="fh">Forms/Appts</th><th class="fh">Purch/Forms</th>
-      <th class="ch">CVR</th>
-    </tr></thead><tbody>
-    ${aggs.map(({label,d})=>`<tr class="agg-row">
-      <td class="left">${label}</td>
-      <td>${n(d.sessions).toLocaleString()}</td><td>${n(d.purchases).toLocaleString()}</td>
-      <td>${fmtPct(d.appts,d.sessions)}</td><td>${fmtPct(d.forms,d.appts)}</td><td>${fmtPct(d.purchases,d.forms)}</td>
-      <td>${n(d.sessions)>0?(n(d.purchases)/n(d.sessions)*100).toFixed(2)+'%':'—'}</td>
-    </tr>`).join('')}
-    </tbody></table></div>
+  <div class="section-label" style="margin-top:24px">Funnel time windows</div>
+  <div class="tbl-wrap"><table><thead><tr>
+    <th class="left" style="min-width:160px">Period</th>
+    <th>Sessions</th><th>Purchases</th>
+    <th class="fh">Appts/Sessions</th><th class="fh">Forms/Appts</th><th class="fh">Purch/Forms</th>
+    <th class="ch">CVR</th>
+  </tr></thead><tbody>
+  ${aggs.map(({l,d})=>`<tr class="agg-row">
+    <td class="left">${l}</td>
+    <td>${n(d.sessions).toLocaleString()}</td><td>${n(d.purchases).toLocaleString()}</td>
+    <td>${fmtPct(d.appts,d.sessions)}</td><td>${fmtPct(d.forms,d.appts)}</td><td>${fmtPct(d.purchases,d.forms)}</td>
+    <td>${n(d.sessions)>0?(n(d.purchases)/n(d.sessions)*100).toFixed(2)+'%':'—'}</td>
+  </tr>`).join('')}
+  </tbody></table></div>
 
   <div class="section-label" style="margin-top:24px">Daily CVR trend — last 14 days</div>
   <div class="chart-wrap">
@@ -541,31 +309,26 @@ function renderFunnel(data, yest, ago7) {
       <span><span class="legend-line" style="background:#7F77DD"></span>Appts/Sessions</span>
       <span><span class="legend-line" style="background:#1D9E75"></span>Forms/Appts</span>
       <span><span class="legend-line" style="background:#D85A30"></span>Purch/Forms</span>
-      <span><span class="legend-line" style="background:#BA7517;border-bottom:2px dashed #BA7517;height:0"></span>CVR (right axis)</span>
+      <span><span class="legend-line" style="background:#BA7517"></span>CVR (right axis)</span>
     </div>
   </div>`;
 
   document.getElementById('loading-funnel').style.display='none';
-  document.getElementById('content-funnel').innerHTML=html;
+  document.getElementById('content-funnel').innerHTML=h;
   document.getElementById('content-funnel').style.display='block';
 
   if(daily14.length>0){
-    const labels=daily14.map(d=>fmtDate(d.date));
-    const as=daily14.map(d=>n(d.sessions)>0?+(n(d.appts)/n(d.sessions)*100).toFixed(1):0);
-    const fa=daily14.map(d=>n(d.appts)>0?+(n(d.forms)/n(d.appts)*100).toFixed(1):0);
-    const pf=daily14.map(d=>n(d.forms)>0?+(n(d.purchases)/n(d.forms)*100).toFixed(1):0);
-    const cvr=daily14.map(d=>n(d.sessions)>0?+(n(d.purchases)/n(d.sessions)*100).toFixed(2):0);
     new Chart(document.getElementById('funnelChart'),{
       type:'line',
-      data:{labels,datasets:[
-        {label:'Appts/Sessions',data:as,borderColor:'#7F77DD',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y'},
-        {label:'Forms/Appts',data:fa,borderColor:'#1D9E75',borderWidth:2,pointRadius:3,tension:0.3,fill:false,borderDash:[4,3],yAxisID:'y'},
-        {label:'Purch/Forms',data:pf,borderColor:'#D85A30',borderWidth:2,pointRadius:3,tension:0.3,fill:false,borderDash:[2,2],yAxisID:'y'},
-        {label:'CVR',data:cvr,borderColor:'#BA7517',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y2'},
+      data:{labels:daily14.map(d=>fmtDate(d.date)),datasets:[
+        {label:'Appts/Sessions',data:daily14.map(d=>n(d.sessions)>0?+(n(d.appts)/n(d.sessions)*100).toFixed(1):0),borderColor:'#7F77DD',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y'},
+        {label:'Forms/Appts',data:daily14.map(d=>n(d.appts)>0?+(n(d.forms)/n(d.appts)*100).toFixed(1):0),borderColor:'#1D9E75',borderWidth:2,pointRadius:3,tension:0.3,fill:false,borderDash:[4,3],yAxisID:'y'},
+        {label:'Purch/Forms',data:daily14.map(d=>n(d.forms)>0?+(n(d.purchases)/n(d.forms)*100).toFixed(1):0),borderColor:'#D85A30',borderWidth:2,pointRadius:3,tension:0.3,fill:false,borderDash:[2,2],yAxisID:'y'},
+        {label:'CVR',data:daily14.map(d=>n(d.sessions)>0?+(n(d.purchases)/n(d.sessions)*100).toFixed(2):0),borderColor:'#BA7517',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y2'},
       ]},
       options:{
         responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%`}}},
+        plugins:{legend:{display:false}},
         scales:{
           x:{ticks:{font:{size:10},maxRotation:45,autoSkip:false},grid:{color:'rgba(0,0,0,0.05)'}},
           y:{position:'left',ticks:{font:{size:10},callback:v=>v+'%'},grid:{color:'rgba(0,0,0,0.05)'},min:0,max:100},
@@ -576,44 +339,29 @@ function renderFunnel(data, yest, ago7) {
   }
 }
 
-// ════════════════════════════════════════════════════════════════════════════
-// INSIGHTS (rule-based)
-// ════════════════════════════════════════════════════════════════════════════
-function loadInsights(data, yest) {
-  const {campaigns, daily} = data;
-  if(!campaigns||!daily) return;
-
-  const WEEKDAY=3250, WEEKEND=2000;
-  const totalYestCost=campaigns.reduce((a,c)=>a+n(c.cost),0);
-
-  // Pacing bars
+// ═══════════════════════════════════════════════════════════════════
+// INSIGHTS
+// ═══════════════════════════════════════════════════════════════════
+function renderInsights(data){
+  const {campaigns=[], daily=[]} = data;
+  const WKDY=3250, WKND=2000;
+  const totalCost=campaigns.reduce((a,c)=>a+n(c.cost),0);
   const maxSpend=Math.max(...daily.map(d=>n(d.cost)),1);
+
   const pacingHTML=daily.map(d=>{
-    const dow=new Date(d.date+'T12:00:00Z').getDay();
-    const isWknd=dow===0||dow===6;
-    const target=isWknd?WEEKEND:WEEKDAY;
-    const delta=n(d.cost)-target;
-    const color=delta>target*0.2?'#E24B4A':delta>0?'#EF9F27':delta<-target*0.3?'#B4B2A9':'#639922';
+    const dow=new Date(d.date+'T12:00:00Z').getDay(),isWknd=dow===0||dow===6;
+    const tgt=isWknd?WKND:WKDY,delta=n(d.cost)-tgt;
+    const color=delta>tgt*0.2?'#E24B4A':delta>0?'#EF9F27':delta<-tgt*0.3?'#B4B2A9':'#639922';
     const barH=Math.max(6,Math.round(n(d.cost)/maxSpend*100));
-    const deltaStr=delta>100?`<span style="color:#E24B4A">+$${Math.round(delta).toLocaleString()}</span>`:
-                   delta<-200?`<span style="color:#888">–$${Math.round(-delta).toLocaleString()}</span>`:
-                   `<span style="color:#639922">✓</span>`;
-    return `<div class="pacing-day">
-      <div class="pacing-lbl">${fmtDate(d.date).split(',')[0]}</div>
-      <div class="pacing-bar-wrap"><div class="pacing-bar" style="height:${barH}%;background:${color}"></div></div>
-      <div class="pacing-spend">$${(n(d.cost)/1000).toFixed(1)}k</div>
-      <div class="pacing-delta">${deltaStr}</div>
-    </div>`;
+    const ds=delta>100?`<span style="color:#E24B4A">+$${Math.round(delta).toLocaleString()}</span>`:delta<-200?`<span style="color:#888">–$${Math.round(-delta).toLocaleString()}</span>`:`<span style="color:#639922">✓</span>`;
+    return `<div class="pacing-day"><div class="pacing-lbl">${fmtDate(d.date).split(',')[0]}</div><div class="pacing-bar-wrap"><div class="pacing-bar" style="height:${barH}%;background:${color}"></div></div><div class="pacing-spend">$${(n(d.cost)/1000).toFixed(1)}k</div><div class="pacing-delta">${ds}</div></div>`;
   }).join('');
 
   const totalActual=daily.reduce((a,d)=>a+n(d.cost),0);
-  const totalTarget=daily.reduce((a,d)=>{const dow=new Date(d.date+'T12:00:00Z').getDay();return a+(dow===0||dow===6?WEEKEND:WEEKDAY);},0);
+  const totalTarget=daily.reduce((a,d)=>{const dow=new Date(d.date+'T12:00:00Z').getDay();return a+(dow===0||dow===6?WKND:WKDY);},0);
   const totalDelta=totalActual-totalTarget;
 
-  // Signal cards
-  const doubleDown=[], investigate=[];
-  const find=(k)=>campaigns.find(c=>c.campaign.includes(k));
-
+  const find=k=>campaigns.find(c=>c.campaign.includes(k));
   const brand=find('Brand')||find('Max_clicks');
   const qcClinik=find('Clinique_Hormonotherapie');
   const hrt=find('HRT_Treatments');
@@ -621,70 +369,31 @@ function loadInsights(data, yest) {
   const pmax=campaigns.find(c=>(c.type||'').toUpperCase().includes('PERFORMANCE')&&n(c.cost)>500);
   const onClinic=find('Menopause_clinic');
 
-  if(brand&&n(brand.purch)>0){
-    const cpa=Math.round(n(brand.cost)/n(brand.purch));
-    if(cpa<150) doubleDown.push({color:'c-green',icon:'⭐',
-      title:`Brand is your most efficient spend <span class="ibadge b-green">$${cpa} CPA · ${fmtRoas(brand.roas)}</span>`,
-      detail:`${n(brand.top_is)>0?(n(brand.top_is)*100).toFixed(0)+'% Top IS':''} · Only <strong>$${Math.round(n(brand.cost)).toLocaleString()} spend</strong> yesterday. Easiest lever for incremental conversions at lowest cost.`});
-  }
+  const dd=[], inv=[];
 
-  if(qcClinik&&n(qcClinik.purch)>0){
-    const cpa=Math.round(n(qcClinik.cost)/n(qcClinik.purch));
-    if(cpa<250) doubleDown.push({color:'c-green',icon:'📈',
-      title:`QC Clinique is your standout new campaign <span class="ibadge b-green">$${cpa} CPA · ${fmtRoas(qcClinik.roas)}</span>`,
-      detail:`Top IS ${n(qcClinik.top_is)>0?(n(qcClinik.top_is)*100).toFixed(0)+'%':'N/A'} — significant room to scale. If CPA holds below $200 over next few days, increase budget.`});
-  }
+  if(brand&&n(brand.purch)>0){const cpa=Math.round(n(brand.cost)/n(brand.purch));if(cpa<150)dd.push({color:'c-green',icon:'⭐',title:`Brand is your most efficient spend <span class="ibadge b-green">$${cpa} CPA · ${fmtRoas(brand.roas)}</span>`,detail:`${n(brand.top_is)>0?(n(brand.top_is)*100).toFixed(0)+'% Top IS — ':''}Only <strong>$${Math.round(n(brand.cost)).toLocaleString()} spend</strong>. Easiest lever for incremental conversions.`});}
+  if(qcClinik&&n(qcClinik.purch)>0){const cpa=Math.round(n(qcClinik.cost)/n(qcClinik.purch));if(cpa<250)dd.push({color:'c-green',icon:'📈',title:`QC Clinique standout new campaign <span class="ibadge b-green">$${cpa} CPA · ${fmtRoas(qcClinik.roas)}</span>`,detail:`Top IS ${n(qcClinik.top_is)>0?(n(qcClinik.top_is)*100).toFixed(0)+'%':'N/A'} — room to scale. If CPA holds below $200, increase budget.`});}
+  if(onClinic&&n(onClinic.purch)>0){const cpa=Math.round(n(onClinic.cost)/n(onClinic.purch));if(cpa<200)dd.push({color:'c-blue',icon:'🏥',title:`ON Menopause Clinic converting efficiently <span class="ibadge b-blue">$${cpa} CPA</span>`,detail:`Top IS ${n(onClinic.top_is)>0?(n(onClinic.top_is)*100).toFixed(0)+'%':'N/A'} — check if budget is constraining.`});}
 
-  if(onClinic&&n(onClinic.purch)>0){
-    const cpa=Math.round(n(onClinic.cost)/n(onClinic.purch));
-    if(cpa<200) doubleDown.push({color:'c-blue',icon:'🏥',
-      title:`ON Menopause Clinic converting efficiently <span class="ibadge b-blue">$${cpa} CPA</span>`,
-      detail:`Strong CVR signal. Top IS ${n(onClinic.top_is)>0?(n(onClinic.top_is)*100).toFixed(0)+'%':'N/A'} — check if budget is constraining this campaign.`});
-  }
+  if(hrt&&n(hrt.cost)>50)inv.push({color:'c-red',icon:'🔒',title:`HRT Treatments spending $${Math.round(n(hrt.cost)).toLocaleString()}/day — LP gated until Jul 6 <span class="ibadge b-red">Pause immediately</span>`,detail:`The /hormone-replacement-therapy page is not live yet. <strong>Pause or zero the budget now.</strong>`});
 
-  if(hrt&&n(hrt.cost)>50) investigate.push({color:'c-red',icon:'🔒',
-    title:`HRT Treatments spending $${Math.round(n(hrt.cost)).toLocaleString()}/day with LP not live until Jul 6 <span class="ibadge b-red">Pause immediately</span>`,
-    detail:`The /hormone-replacement-therapy landing page is not live until July 6, 2026. <strong>Pause or zero the budget now.</strong>`});
+  const yestD=daily[daily.length-1];
+  if(yestD){const dow=new Date(yestD.date+'T12:00:00Z').getDay(),ceil=dow===0||dow===6?2000:3500;if(n(yestD.cost)>ceil){const ps=pmax?Math.round(n(pmax.cost)/totalCost*100):0;inv.push({color:'c-red',icon:'⚠️',title:`Spend $${Math.round(n(yestD.cost)-ceil).toLocaleString()} over ceiling <span class="ibadge b-red">$${Math.round(n(yestD.cost)).toLocaleString()} vs $${ceil.toLocaleString()}</span>`,detail:`${pmax?`PMax: <strong>$${Math.round(n(pmax.cost)).toLocaleString()} (${ps}% of budget)</strong> on uncapped bidding. `:''}Consider setting a PMax daily budget cap.`});}}
 
-  const yestData=daily[daily.length-1];
-  if(yestData){
-    const dow=new Date(yestData.date+'T12:00:00Z').getDay();
-    const ceil=dow===0||dow===6?2000:3500;
-    if(n(yestData.cost)>ceil){
-      const pmaxShare=pmax?Math.round(n(pmax.cost)/totalYestCost*100):0;
-      investigate.push({color:'c-red',icon:'⚠️',
-        title:`Spend $${Math.round(n(yestData.cost)-ceil).toLocaleString()} over ceiling <span class="ibadge b-red">$${Math.round(n(yestData.cost)).toLocaleString()} vs $${ceil.toLocaleString()} target</span>`,
-        detail:`${pmax?`PMax alone: <strong>$${Math.round(n(pmax.cost)).toLocaleString()} (${pmaxShare}% of budget)</strong> on uncapped bidding. `:''}Consider setting a PMax daily budget cap.`});
-    }
-  }
-
-  if(qcPortfolio){
-    const cpa=n(qcPortfolio.purch)>0?Math.round(n(qcPortfolio.cost)/n(qcPortfolio.purch)):null;
-    if(cpa&&cpa>400) investigate.push({color:'c-red',icon:'🔥',
-      title:`QC FR Portfolio bleeding spend <span class="ibadge b-red">$${cpa} CPA</span>`,
-      detail:`<strong>$${cpa} per conversion</strong>. Legacy campaign being replaced by QC Clinique. Migrate budget actively.`});
-    else if(!cpa&&n(qcPortfolio.cost)>200) investigate.push({color:'c-amber',icon:'🔥',
-      title:`QC FR Portfolio: $${Math.round(n(qcPortfolio.cost)).toLocaleString()} spend, 0 conversions`,
-      detail:`Legacy campaign. Shift budget to QC Clinique as it matures.`});
-  }
+  if(qcPortfolio){const cpa=n(qcPortfolio.purch)>0?Math.round(n(qcPortfolio.cost)/n(qcPortfolio.purch)):null;if(cpa&&cpa>400)inv.push({color:'c-red',icon:'🔥',title:`QC FR Portfolio: $${cpa} CPA <span class="ibadge b-red">Migrate budget</span>`,detail:`Legacy campaign. Shift spend to QC Clinique as it matures.`});else if(!cpa&&n(qcPortfolio.cost)>200)inv.push({color:'c-amber',icon:'🔥',title:`QC FR Portfolio: $${Math.round(n(qcPortfolio.cost)).toLocaleString()} spend, 0 conv`,detail:`Legacy campaign. Begin shifting budget to QC Clinique.`});}
 
   campaigns.filter(c=>n(c.purch)===0&&n(c.cost)>200&&!c.campaign.includes('HRT')&&!c.campaign.includes('Portfolio')&&!c.campaign.includes('Max_clicks')&&!c.campaign.includes('Brand')).forEach(c=>{
-    const short=c.campaign.replace(/Search_|_tCPA/g,'').split(' ')[0].slice(0,30);
-    investigate.push({color:'c-amber',icon:'⏱',
-      title:`${short}: $${Math.round(n(c.cost)).toLocaleString()} spend, 0 conversions <span class="ibadge b-amber">Learning phase</span>`,
-      detail:`New campaign — expected in first 7–14 days. Monitor appt click rate in PostHog for early quality signal.`});
+    const short=c.campaign.replace(/Search_|_tCPA/g,'').split(' ')[0].slice(0,35);
+    inv.push({color:'c-amber',icon:'⏱',title:`${short}: $${Math.round(n(c.cost)).toLocaleString()} spend, 0 conversions <span class="ibadge b-amber">Learning phase</span>`,detail:`Expected in first 7–14 days. Monitor appt click rate for early signal.`});
   });
 
-  const t7purch=daily.reduce((a,d)=>a+n(d.purch),0);
-  const t7cost=daily.reduce((a,d)=>a+n(d.cost),0);
-  const t7cpa=t7purch>0?Math.round(t7cost/t7purch):null;
-  const topIssue=hrt&&n(hrt.cost)>50?'Pause HRT Treatments immediately (LP gated until Jul 6)':
-    investigate.length>0?investigate[0].title.replace(/<[^>]+>/g,'').trim():
-    'Monitor new campaigns through learning phase';
+  const t7p=daily.reduce((a,d)=>a+n(d.purch),0),t7c=daily.reduce((a,d)=>a+n(d.cost),0);
+  const t7cpa=t7p>0?Math.round(t7c/t7p):null;
+  const topIssue=hrt&&n(hrt.cost)>50?'Pause HRT Treatments immediately (LP gated until Jul 6)':inv.length>0?inv[0].title.replace(/<[^>]+>/g,'').trim():'Monitor new campaigns through learning phase';
 
-  const html=`
+  const h=`
   <div class="section-label">Spend pacing — last 7 days</div>
-  <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:8px;">
+  <div style="background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:8px;">
     <div class="pacing-grid">${pacingHTML}</div>
     <div style="font-size:11px;color:var(--hint);margin-top:8px;">
       7d actual: <strong style="color:var(--text)">$${Math.round(totalActual).toLocaleString()}</strong> vs target $${Math.round(totalTarget).toLocaleString()}
@@ -694,21 +403,17 @@ function loadInsights(data, yest) {
   </div>
   <div class="divider"></div>
   <div class="section-label">Double down</div>
-  ${doubleDown.map(c=>`<div class="insight-card ${c.color}"><div class="card-icon">${c.icon}</div><div><div class="card-title">${c.title}</div><div class="card-detail">${c.detail}</div></div></div>`).join('')}
-  ${doubleDown.length===0?'<div style="font-size:12px;color:var(--hint);padding:8px 0">No strong scale signals today.</div>':''}
+  ${dd.map(c=>`<div class="insight-card ${c.color}"><div class="card-icon">${c.icon}</div><div><div class="card-title">${c.title}</div><div class="card-detail">${c.detail}</div></div></div>`).join('')}
+  ${dd.length===0?'<div style="font-size:12px;color:var(--hint);padding:8px 0">No strong scale signals today.</div>':''}
   <div class="divider"></div>
   <div class="section-label">Investigate</div>
-  ${investigate.map(c=>`<div class="insight-card ${c.color}"><div class="card-icon">${c.icon}</div><div><div class="card-title">${c.title}</div><div class="card-detail">${c.detail}</div></div></div>`).join('')}
-  ${investigate.length===0?'<div style="font-size:12px;color:var(--hint);padding:8px 0">No issues flagged today. 👌</div>':''}
+  ${inv.map(c=>`<div class="insight-card ${c.color}"><div class="card-icon">${c.icon}</div><div><div class="card-title">${c.title}</div><div class="card-detail">${c.detail}</div></div></div>`).join('')}
+  ${inv.length===0?'<div style="font-size:12px;color:var(--hint);padding:8px 0">No issues flagged today. 👌</div>':''}
   <div class="divider"></div>
-  <div class="bottom-line">
-    <strong>Bottom line:</strong> ${topIssue}.
-    7-day CPA is <strong>${t7cpa?'$'+t7cpa.toLocaleString():'—'}</strong>
-    ${t7cpa&&t7cpa<200?' — trending well as new campaigns mature.':t7cpa&&t7cpa>300?' — elevated while new campaigns learn; expect improvement over next 7–10 days.':' — monitor daily as new campaigns stabilize.'}
-  </div>`;
+  <div class="bottom-line"><strong>Bottom line:</strong> ${topIssue}. 7-day CPA is <strong>${t7cpa?'$'+t7cpa.toLocaleString():'—'}</strong>${t7cpa&&t7cpa<200?' — trending well.':t7cpa&&t7cpa>300?' — elevated while new campaigns learn; expect improvement over 7–10 days.':' — monitor daily.'}</div>`;
 
   document.getElementById('loading-insights').style.display='none';
-  document.getElementById('content-insights').innerHTML=html;
+  document.getElementById('content-insights').innerHTML=h;
   document.getElementById('content-insights').style.display='block';
 }
 
