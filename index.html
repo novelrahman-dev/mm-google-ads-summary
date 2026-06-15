@@ -236,14 +236,13 @@ function renderCampaigns(d){
   const daily = (d.daily||[]).filter(r=>r.date!=='2026-06-15');
 
   // ── Full shared column header (same across all 3 tables)
-  // Account Summary + Daily show — for funnel/IS/ROAS (account-level doesn't break down that way)
   const fullHdr = `
     <th class="r">Impr.</th>
     <th class="r">Clicks</th>
     <th class="r">CTR</th>
     <th class="r">Avg CPC</th>
     <th class="r">Spend</th>
-    <th class="r">Appts/Clicks</th>
+    <th class="r">Appts/Sessions</th>
     <th class="r">Forms/Appts</th>
     <th class="r">Purch/Forms</th>
     <th class="r">ROAS</th>
@@ -260,6 +259,7 @@ function renderCampaigns(d){
   ];
   const summaryRows = periods.map(p=>{
     const r=p.r;
+    const fn=r.funnel||{};
     return `<tr>
       <td><strong>${p.label}</strong></td>
       <td class="r">${fmtNum(r.impressions)}</td>
@@ -267,9 +267,9 @@ function renderCampaigns(d){
       <td class="r">${r.ctr!=null?r.ctr.toFixed(2)+'%':'—'}</td>
       <td class="r">${r.cpc!=null?'$'+r.cpc.toFixed(2):'—'}</td>
       <td class="r">${fmtCAD(r.cost)}</td>
-      <td class="r">—</td>
-      <td class="r">—</td>
-      <td class="r">—</td>
+      <td class="r">${fn.appts_per_session!=null?fn.appts_per_session.toFixed(1)+'%':'—'}</td>
+      <td class="r">${fn.forms_per_appt!=null?fn.forms_per_appt.toFixed(1)+'%':'—'}</td>
+      <td class="r">${fn.purch_per_form!=null?fn.purch_per_form.toFixed(1)+'%':'—'}</td>
       <td class="r">—</td>
       <td class="r">—</td>
       <td class="r">—</td>
@@ -300,7 +300,7 @@ function renderCampaigns(d){
     <td class="r">${cpaTag(c.cpa_14d)}</td>
   </tr>`).join('');
 
-  // ── Daily Breakdown — same full cols as Account Summary (funnel/IS/ROAS = — per day) ──
+  // ── Daily Breakdown — full cols with funnel rates from PostHog daily14_funnel ──
   const dailyRows = daily.map(r=>`<tr>
     <td>${r.date}</td>
     <td class="r">${fmtNum(r.impressions)}</td>
@@ -308,9 +308,9 @@ function renderCampaigns(d){
     <td class="r">${r.clicks&&r.impressions?(r.clicks/r.impressions*100).toFixed(2)+'%':'—'}</td>
     <td class="r">${r.clicks&&r.cost?'$'+(r.cost/r.clicks).toFixed(2):'—'}</td>
     <td class="r">${fmtCAD(r.cost)}</td>
-    <td class="r">—</td>
-    <td class="r">—</td>
-    <td class="r">—</td>
+    <td class="r">${r.appts_per_session!=null?r.appts_per_session.toFixed(1)+'%':'—'}</td>
+    <td class="r">${r.forms_per_appt!=null?r.forms_per_appt.toFixed(1)+'%':'—'}</td>
+    <td class="r">${r.purch_per_form!=null?r.purch_per_form.toFixed(1)+'%':'—'}</td>
     <td class="r">—</td>
     <td class="r">—</td>
     <td class="r">—</td>
@@ -367,7 +367,7 @@ function renderCampaigns(d){
         <tbody>${dailyRows}</tbody>
       </table>
     </div>
-    <p class="footnote">Funnel/IS/ROAS columns are campaign-level only — shown as — for account and daily rollups. *[gtag] purchase only</p>`;
+    <p class="footnote">Funnel rates from PostHog (all channels, session-scoped). IS and ROAS are campaign-level only. *[gtag] purchase only</p>`;
 }
 
 // ─── SITE FUNNEL ──────────────────────────────────────────────────────────────
