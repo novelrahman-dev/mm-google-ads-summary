@@ -235,17 +235,24 @@ function renderCampaigns(d){
   const t14=totals['14d']||{}, t7=totals['7d']||{}, ty=totals.yesterday||{};
   const daily = (d.daily||[]).filter(r=>r.date!=='2026-06-15');
 
-  // ── Shared column header: Impr · Clicks · CTR · CPC · Cost · Purchases · CPA
-  const sharedHdr = `
+  // ── Full shared column header (same across all 3 tables)
+  // Account Summary + Daily show — for funnel/IS/ROAS (account-level doesn't break down that way)
+  const fullHdr = `
     <th class="r">Impr.</th>
     <th class="r">Clicks</th>
     <th class="r">CTR</th>
     <th class="r">Avg CPC</th>
     <th class="r">Spend</th>
+    <th class="r">Appts/Clicks</th>
+    <th class="r">Forms/Appts</th>
+    <th class="r">Purch/Forms</th>
+    <th class="r">ROAS</th>
+    <th class="r">Top IS</th>
+    <th class="r">Bgt Lost IS</th>
     <th class="r">Purchases*</th>
     <th class="r">CPA</th>`;
 
-  // ── Account Summary (3 rows × shared cols) ──
+  // ── Account Summary (3 rows — funnel/IS/ROAS show — at account level) ──
   const periods = [
     {label:'Yesterday',    r:ty},
     {label:'Last 7 Days',  r:t7},
@@ -260,14 +267,20 @@ function renderCampaigns(d){
       <td class="r">${r.ctr!=null?r.ctr.toFixed(2)+'%':'—'}</td>
       <td class="r">${r.cpc!=null?'$'+r.cpc.toFixed(2):'—'}</td>
       <td class="r">${fmtCAD(r.cost)}</td>
+      <td class="r">—</td>
+      <td class="r">—</td>
+      <td class="r">—</td>
+      <td class="r">—</td>
+      <td class="r">—</td>
+      <td class="r">—</td>
       <td class="r">${r.purchases!=null?r.purchases.toFixed(1):'—'}</td>
       <td class="r">${cpaTag(r.cpa)}</td>
     </tr>`;
   }).join('');
 
-  // ── Campaign table (shared cols + 3 CPA columns) ──
+  // ── Campaign table — full cols + 3 CPA columns ──
   const campRows = camps.map(c=>`<tr>
-    <td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;" title="${c.campaign}">
+    <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis;" title="${c.campaign}">
       ${campTag(c.campaign,c.type)} ${sc(c.campaign).substring(0,36)}
     </td>
     <td class="r">${fmtNum(c.yest_impressions||0)}</td>
@@ -287,7 +300,7 @@ function renderCampaigns(d){
     <td class="r">${cpaTag(c.cpa_14d)}</td>
   </tr>`).join('');
 
-  // ── Daily Breakdown (shared cols — same as Account Summary shape) ──
+  // ── Daily Breakdown — same full cols as Account Summary (funnel/IS/ROAS = — per day) ──
   const dailyRows = daily.map(r=>`<tr>
     <td>${r.date}</td>
     <td class="r">${fmtNum(r.impressions)}</td>
@@ -295,6 +308,12 @@ function renderCampaigns(d){
     <td class="r">${r.clicks&&r.impressions?(r.clicks/r.impressions*100).toFixed(2)+'%':'—'}</td>
     <td class="r">${r.clicks&&r.cost?'$'+(r.cost/r.clicks).toFixed(2):'—'}</td>
     <td class="r">${fmtCAD(r.cost)}</td>
+    <td class="r">—</td>
+    <td class="r">—</td>
+    <td class="r">—</td>
+    <td class="r">—</td>
+    <td class="r">—</td>
+    <td class="r">—</td>
     <td class="r">${r.purchases!=null?r.purchases.toFixed(1):'—'}</td>
     <td class="r">${cpaTag(r.cpa)}</td>
   </tr>`).join('');
@@ -305,7 +324,7 @@ function renderCampaigns(d){
       <table>
         <thead><tr>
           <th>Period</th>
-          ${sharedHdr}
+          ${fullHdr}
         </tr></thead>
         <tbody>${summaryRows}</tbody>
       </table>
@@ -343,12 +362,12 @@ function renderCampaigns(d){
       <table>
         <thead><tr>
           <th>Date</th>
-          ${sharedHdr}
+          ${fullHdr}
         </tr></thead>
         <tbody>${dailyRows}</tbody>
       </table>
     </div>
-    <p class="footnote">*[gtag] purchase only</p>`;
+    <p class="footnote">Funnel/IS/ROAS columns are campaign-level only — shown as — for account and daily rollups. *[gtag] purchase only</p>`;
 }
 
 // ─── SITE FUNNEL ──────────────────────────────────────────────────────────────
