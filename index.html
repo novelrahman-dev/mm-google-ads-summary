@@ -270,9 +270,9 @@ function renderCampaigns(d){
       <td class="r">${fn.appts_per_click!=null?fn.appts_per_click.toFixed(1)+'%':'—'}</td>
       <td class="r">${fn.forms_per_appt!=null?fn.forms_per_appt.toFixed(1)+'%':'—'}</td>
       <td class="r">${fn.purch_per_form!=null?fn.purch_per_form.toFixed(1)+'%':'—'}</td>
-      <td class="r">—</td>
-      <td class="r">—</td>
       <td class="r">${r.roas!=null?r.roas.toFixed(2)+'x':'—'}</td>
+      <td class="r">—</td>
+      <td class="r">—</td>
       <td class="r">${r.purchases!=null?r.purchases.toFixed(1):'—'}</td>
       <td class="r">${cpaTag(r.cpa)}</td>
     </tr>`;
@@ -311,9 +311,9 @@ function renderCampaigns(d){
     <td class="r">${r.appts_per_click!=null?r.appts_per_click.toFixed(1)+'%':'—'}</td>
     <td class="r">${r.forms_per_appt!=null?r.forms_per_appt.toFixed(1)+'%':'—'}</td>
     <td class="r">${r.purch_per_form!=null?r.purch_per_form.toFixed(1)+'%':'—'}</td>
-    <td class="r">—</td>
-    <td class="r">—</td>
     <td class="r">${r.roas!=null?r.roas.toFixed(2)+'x':'—'}</td>
+    <td class="r">—</td>
+    <td class="r">—</td>
     <td class="r">${r.purchases!=null?r.purchases.toFixed(1):'—'}</td>
     <td class="r">${cpaTag(r.cpa)}</td>
   </tr>`).join('');
