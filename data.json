@@ -1,9 +1,579 @@
 {
-  "generated_at": "Awaiting first data pull — type 'pull morning data' in Claude",
-  "campaigns": [],
-  "daily": [],
-  "agg14": [],
-  "agg30": [],
-  "channels": [],
-  "daily14": []
+  "generated_at": "2026-06-15 07:42 UTC",
+  "campaigns": [
+    {
+      "campaign": "[NB] CA | Treatments",
+      "spend": 693.31,
+      "clicks": 177,
+      "impressions": 2371,
+      "roas": 239.87,
+      "conversions": 29.14
+    },
+    {
+      "campaign": "Search_CA_Max_clicks [Brand]",
+      "spend": 3835.92,
+      "clicks": 2999,
+      "impressions": 9392,
+      "roas": 1483.51,
+      "conversions": 720.06
+    },
+    {
+      "campaign": "Search_QC_FR_Treatments_tCPA_Portfolio_bid_Account_default [NB]",
+      "spend": 8588.2,
+      "clicks": 2008,
+      "impressions": 18355,
+      "roas": 177.58,
+      "conversions": 278.14
+    },
+    {
+      "campaign": "[PMax] CA | Treatments | Max conversions",
+      "spend": 15549.13,
+      "clicks": 6984,
+      "impressions": 90116,
+      "roas": 164.85,
+      "conversions": 94.82
+    },
+    {
+      "campaign": "Search_CA_Treatments_tCPA [NB]",
+      "spend": 10192.44,
+      "clicks": 2353,
+      "impressions": 24912,
+      "roas": 98.16,
+      "conversions": 37.57
+    },
+    {
+      "campaign": "PMax_CA_Treatments_Max_conversion_value [NB]",
+      "spend": 23560.16,
+      "clicks": 12283,
+      "impressions": 148063,
+      "roas": 160.73,
+      "conversions": 136.66
+    },
+    {
+      "campaign": "Search_ON_Menopause_clinic_tCPA [NB]",
+      "spend": 5280.09,
+      "clicks": 1126,
+      "impressions": 6345,
+      "roas": 148.51,
+      "conversions": 30.58
+    },
+    {
+      "campaign": "Search_QC_FR_Treatments_tCPA [NB]",
+      "spend": 5084.74,
+      "clicks": 1117,
+      "impressions": 8984,
+      "roas": 83.7,
+      "conversions": 16.09
+    },
+    {
+      "campaign": "[NB] CA | Menopause clinic [Purchase]",
+      "spend": 1656.67,
+      "clicks": 476,
+      "impressions": 3384,
+      "roas": 89.03,
+      "conversions": 5.0
+    },
+    {
+      "campaign": "[Legacy] CA | MM [Booking]",
+      "spend": 348.21,
+      "clicks": 158,
+      "impressions": 1577,
+      "roas": 427.91,
+      "conversions": 12.67
+    },
+    {
+      "campaign": "[Legacy] CA | MM [Click]",
+      "spend": 48.36,
+      "clicks": 31,
+      "impressions": 331,
+      "roas": 206.8,
+      "conversions": 5.0
+    },
+    {
+      "campaign": "Search_CA_EN_Competitors [NB]",
+      "spend": 267.15,
+      "clicks": 55,
+      "impressions": 1138,
+      "roas": 0.0,
+      "conversions": 0.0
+    },
+    {
+      "campaign": "Search_ON_AB_Clinic_tCPA [NB]",
+      "spend": 476.74,
+      "clicks": 129,
+      "impressions": 1750,
+      "roas": 61.88,
+      "conversions": 1.0
+    },
+    {
+      "campaign": "Search_CA_EN_Clinic_tCPA [NB]",
+      "spend": 718.26,
+      "clicks": 198,
+      "impressions": 1541,
+      "roas": 0.0,
+      "conversions": 0.0
+    },
+    {
+      "campaign": "Search_CA_EN_HRT_Treatments_tCPA [NB]",
+      "spend": 736.54,
+      "clicks": 279,
+      "impressions": 7606,
+      "roas": 0.0,
+      "conversions": 0.0
+    },
+    {
+      "campaign": "Search_QC_FR_Clinique_Hormonotherapie_tCPA [NB]",
+      "spend": 1787.26,
+      "clicks": 303,
+      "impressions": 4403,
+      "roas": 180.76,
+      "conversions": 11.95
+    }
+  ],
+  "daily": [
+    {
+      "date": "2026-06-01",
+      "spend": 2650.5,
+      "clicks": 1097,
+      "conversions": 63.42,
+      "roas": 258.86
+    },
+    {
+      "date": "2026-06-02",
+      "spend": 2509.69,
+      "clicks": 1065,
+      "conversions": 57.8,
+      "roas": 293.33
+    },
+    {
+      "date": "2026-06-03",
+      "spend": 2462.6,
+      "clicks": 1095,
+      "conversions": 59.83,
+      "roas": 286.1
+    },
+    {
+      "date": "2026-06-04",
+      "spend": 2815.75,
+      "clicks": 1181,
+      "conversions": 48.31,
+      "roas": 208.52
+    },
+    {
+      "date": "2026-06-05",
+      "spend": 2500.34,
+      "clicks": 890,
+      "conversions": 11.18,
+      "roas": 131.96
+    },
+    {
+      "date": "2026-06-06",
+      "spend": 2294.57,
+      "clicks": 829,
+      "conversions": 11.47,
+      "roas": 147.47
+    },
+    {
+      "date": "2026-06-07",
+      "spend": 2823.15,
+      "clicks": 982,
+      "conversions": 11.79,
+      "roas": 97.63
+    },
+    {
+      "date": "2026-06-08",
+      "spend": 3185.49,
+      "clicks": 978,
+      "conversions": 18.67,
+      "roas": 135.88
+    },
+    {
+      "date": "2026-06-09",
+      "spend": 2199.73,
+      "clicks": 621,
+      "conversions": 14.38,
+      "roas": 153.79
+    },
+    {
+      "date": "2026-06-10",
+      "spend": 2114.74,
+      "clicks": 581,
+      "conversions": 8.9,
+      "roas": 124.11
+    },
+    {
+      "date": "2026-06-11",
+      "spend": 3088.2,
+      "clicks": 837,
+      "conversions": 22.23,
+      "roas": 134.23
+    },
+    {
+      "date": "2026-06-12",
+      "spend": 4199.73,
+      "clicks": 1049,
+      "conversions": 16.1,
+      "roas": 82.46
+    },
+    {
+      "date": "2026-06-13",
+      "spend": 2857.41,
+      "clicks": 710,
+      "conversions": 6.03,
+      "roas": 62.23
+    },
+    {
+      "date": "2026-06-14",
+      "spend": 2486.58,
+      "clicks": 682,
+      "conversions": 11.0,
+      "roas": 130.5
+    }
+  ],
+  "agg14": [
+    {
+      "campaign": "Search_CA_Max_clicks [Brand]",
+      "spend": 1906.79,
+      "clicks": 1383,
+      "conversions": 171.46,
+      "roas": 990.98
+    },
+    {
+      "campaign": "Search_QC_FR_Treatments_tCPA_Portfolio_bid_Account_default [NB]",
+      "spend": 3071.38,
+      "clicks": 549,
+      "conversions": 54.23,
+      "roas": 104.99
+    },
+    {
+      "campaign": "[PMax] CA | Treatments | Max conversions",
+      "spend": 5472.67,
+      "clicks": 2183,
+      "conversions": 28.62,
+      "roas": 143.43
+    },
+    {
+      "campaign": "Search_CA_Treatments_tCPA [NB]",
+      "spend": 6299.04,
+      "clicks": 1162,
+      "conversions": 17.76,
+      "roas": 73.81
+    },
+    {
+      "campaign": "PMax_CA_Treatments_Max_conversion_value [NB]",
+      "spend": 11069.02,
+      "clicks": 5206,
+      "conversions": 58.72,
+      "roas": 147.09
+    },
+    {
+      "campaign": "Search_ON_Menopause_clinic_tCPA [NB]",
+      "spend": 3376.17,
+      "clicks": 578,
+      "conversions": 10.49,
+      "roas": 91.67
+    },
+    {
+      "campaign": "Search_QC_FR_Treatments_tCPA [NB]",
+      "spend": 2998.49,
+      "clicks": 565,
+      "conversions": 6.87,
+      "roas": 67.56
+    },
+    {
+      "campaign": "Search_CA_EN_Competitors [NB]",
+      "spend": 267.15,
+      "clicks": 55,
+      "conversions": 0,
+      "roas": 0
+    },
+    {
+      "campaign": "Search_ON_AB_Clinic_tCPA [NB]",
+      "spend": 476.74,
+      "clicks": 129,
+      "conversions": 1.0,
+      "roas": 61.88
+    },
+    {
+      "campaign": "Search_CA_EN_Clinic_tCPA [NB]",
+      "spend": 718.26,
+      "clicks": 198,
+      "conversions": 0,
+      "roas": 0
+    },
+    {
+      "campaign": "Search_CA_EN_HRT_Treatments_tCPA [NB]",
+      "spend": 736.54,
+      "clicks": 279,
+      "conversions": 0,
+      "roas": 0
+    },
+    {
+      "campaign": "Search_QC_FR_Clinique_Hormonotherapie_tCPA [NB]",
+      "spend": 1787.26,
+      "clicks": 303,
+      "conversions": 11.95,
+      "roas": 180.76
+    }
+  ],
+  "agg30": [
+    {
+      "campaign": "[NB] CA | Treatments",
+      "spend": 693.31,
+      "clicks": 177,
+      "impressions": 2371,
+      "roas": 239.87,
+      "conversions": 29.14
+    },
+    {
+      "campaign": "Search_CA_Max_clicks [Brand]",
+      "spend": 3835.92,
+      "clicks": 2999,
+      "impressions": 9392,
+      "roas": 1483.51,
+      "conversions": 720.06
+    },
+    {
+      "campaign": "Search_QC_FR_Treatments_tCPA_Portfolio_bid_Account_default [NB]",
+      "spend": 8588.2,
+      "clicks": 2008,
+      "impressions": 18355,
+      "roas": 177.58,
+      "conversions": 278.14
+    },
+    {
+      "campaign": "[PMax] CA | Treatments | Max conversions",
+      "spend": 15549.13,
+      "clicks": 6984,
+      "impressions": 90116,
+      "roas": 164.85,
+      "conversions": 94.82
+    },
+    {
+      "campaign": "Search_CA_Treatments_tCPA [NB]",
+      "spend": 10192.44,
+      "clicks": 2353,
+      "impressions": 24912,
+      "roas": 98.16,
+      "conversions": 37.57
+    },
+    {
+      "campaign": "PMax_CA_Treatments_Max_conversion_value [NB]",
+      "spend": 23560.16,
+      "clicks": 12283,
+      "impressions": 148063,
+      "roas": 160.73,
+      "conversions": 136.66
+    },
+    {
+      "campaign": "Search_ON_Menopause_clinic_tCPA [NB]",
+      "spend": 5280.09,
+      "clicks": 1126,
+      "impressions": 6345,
+      "roas": 148.51,
+      "conversions": 30.58
+    },
+    {
+      "campaign": "Search_QC_FR_Treatments_tCPA [NB]",
+      "spend": 5084.74,
+      "clicks": 1117,
+      "impressions": 8984,
+      "roas": 83.7,
+      "conversions": 16.09
+    },
+    {
+      "campaign": "[NB] CA | Menopause clinic [Purchase]",
+      "spend": 1656.67,
+      "clicks": 476,
+      "impressions": 3384,
+      "roas": 89.03,
+      "conversions": 5.0
+    },
+    {
+      "campaign": "[Legacy] CA | MM [Booking]",
+      "spend": 348.21,
+      "clicks": 158,
+      "impressions": 1577,
+      "roas": 427.91,
+      "conversions": 12.67
+    },
+    {
+      "campaign": "[Legacy] CA | MM [Click]",
+      "spend": 48.36,
+      "clicks": 31,
+      "impressions": 331,
+      "roas": 206.8,
+      "conversions": 5.0
+    },
+    {
+      "campaign": "Search_CA_EN_Competitors [NB]",
+      "spend": 267.15,
+      "clicks": 55,
+      "impressions": 1138,
+      "roas": 0.0,
+      "conversions": 0.0
+    },
+    {
+      "campaign": "Search_ON_AB_Clinic_tCPA [NB]",
+      "spend": 476.74,
+      "clicks": 129,
+      "impressions": 1750,
+      "roas": 61.88,
+      "conversions": 1.0
+    },
+    {
+      "campaign": "Search_CA_EN_Clinic_tCPA [NB]",
+      "spend": 718.26,
+      "clicks": 198,
+      "impressions": 1541,
+      "roas": 0.0,
+      "conversions": 0.0
+    },
+    {
+      "campaign": "Search_CA_EN_HRT_Treatments_tCPA [NB]",
+      "spend": 736.54,
+      "clicks": 279,
+      "impressions": 7606,
+      "roas": 0.0,
+      "conversions": 0.0
+    },
+    {
+      "campaign": "Search_QC_FR_Clinique_Hormonotherapie_tCPA [NB]",
+      "spend": 1787.26,
+      "clicks": 303,
+      "impressions": 4403,
+      "roas": 180.76,
+      "conversions": 11.95
+    }
+  ],
+  "channels": [
+    {
+      "utm_source": "(direct)",
+      "cta_clicks": 5072,
+      "forms": 799,
+      "payments": 422
+    },
+    {
+      "utm_source": "google_paid",
+      "cta_clicks": 2589,
+      "forms": 694,
+      "payments": 342
+    },
+    {
+      "utm_source": "fb",
+      "cta_clicks": 368,
+      "forms": 87,
+      "payments": 18
+    },
+    {
+      "utm_source": "ig",
+      "cta_clicks": 165,
+      "forms": 44,
+      "payments": 5
+    },
+    {
+      "utm_source": "chatgpt.com",
+      "cta_clicks": 78,
+      "forms": 27,
+      "payments": 14
+    },
+    {
+      "utm_source": "bing",
+      "cta_clicks": 37,
+      "forms": 6,
+      "payments": 2
+    },
+    {
+      "utm_source": "google",
+      "cta_clicks": 18,
+      "forms": 3,
+      "payments": 0
+    }
+  ],
+  "daily14": [
+    {
+      "date": "2026-06-01",
+      "cta_clicks": 259,
+      "forms": 66,
+      "payments": 32
+    },
+    {
+      "date": "2026-06-02",
+      "cta_clicks": 306,
+      "forms": 60,
+      "payments": 30
+    },
+    {
+      "date": "2026-06-03",
+      "cta_clicks": 275,
+      "forms": 57,
+      "payments": 27
+    },
+    {
+      "date": "2026-06-04",
+      "cta_clicks": 251,
+      "forms": 59,
+      "payments": 23
+    },
+    {
+      "date": "2026-06-05",
+      "cta_clicks": 352,
+      "forms": 73,
+      "payments": 25
+    },
+    {
+      "date": "2026-06-06",
+      "cta_clicks": 263,
+      "forms": 60,
+      "payments": 19
+    },
+    {
+      "date": "2026-06-07",
+      "cta_clicks": 280,
+      "forms": 53,
+      "payments": 21
+    },
+    {
+      "date": "2026-06-08",
+      "cta_clicks": 386,
+      "forms": 117,
+      "payments": 37
+    },
+    {
+      "date": "2026-06-09",
+      "cta_clicks": 322,
+      "forms": 82,
+      "payments": 38
+    },
+    {
+      "date": "2026-06-10",
+      "cta_clicks": 322,
+      "forms": 50,
+      "payments": 29
+    },
+    {
+      "date": "2026-06-11",
+      "cta_clicks": 284,
+      "forms": 43,
+      "payments": 26
+    },
+    {
+      "date": "2026-06-12",
+      "cta_clicks": 224,
+      "forms": 46,
+      "payments": 38
+    },
+    {
+      "date": "2026-06-13",
+      "cta_clicks": 215,
+      "forms": 40,
+      "payments": 23
+    },
+    {
+      "date": "2026-06-14",
+      "cta_clicks": 191,
+      "forms": 37,
+      "payments": 36
+    }
+  ]
 }
