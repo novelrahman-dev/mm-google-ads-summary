@@ -466,9 +466,10 @@ function renderFunnel(d){
 
 // ─── Bootstrap ────────────────────────────────────────────────────────────────
 async function loadData(){
-  const url=`https://raw.githubusercontent.com/novelrahman-dev/mm-google-ads-summary/main/data.json?t=${Date.now()}`;
+  // GitHub API bypasses raw CDN cache (raw.githubusercontent.com caches up to 5min+)
+  const url=`https://api.github.com/repos/novelrahman-dev/mm-google-ads-summary/contents/data.json`;
   try{
-    const res=await fetch(url);
+    const res=await fetch(url,{headers:{Accept:'application/vnd.github.raw+json'}});
     if(!res.ok) throw new Error(`HTTP ${res.status}`);
     const data=await res.json();
     $e('meta').textContent=`Generated: ${data.generated_at}`;
