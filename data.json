@@ -79,12 +79,12 @@
       "purchases_14d": 55.49,
       "cpa_14d": 199.09,
       "avg_roas_14d": 1.4,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
-      "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "ph_appts": 92,
+      "ph_forms": 25,
+      "ph_purchases": 9,
+      "funnel_appts_per_click": 1.6,
+      "funnel_forms_per_appt": 27.2,
+      "funnel_purchases_per_form": 36.0
     },
     {
       "campaign": "Search_CA_EN_Clinic_tCPA [NB]",
@@ -106,12 +106,12 @@
       "purchases_14d": 0,
       "cpa_14d": null,
       "avg_roas_14d": 0.0,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
+      "ph_appts": 38,
+      "ph_forms": 6,
+      "ph_purchases": 0,
       "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "funnel_forms_per_appt": 15.8,
+      "funnel_purchases_per_form": 0.0
     },
     {
       "campaign": "Search_CA_EN_Competitors [NB]",
@@ -133,11 +133,11 @@
       "purchases_14d": 0,
       "cpa_14d": null,
       "avg_roas_14d": 0.0,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
+      "ph_appts": 3,
+      "ph_forms": 0,
+      "ph_purchases": 0,
       "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
+      "funnel_forms_per_appt": 0.0,
       "funnel_purchases_per_form": null
     },
     {
@@ -160,11 +160,11 @@
       "purchases_14d": 0,
       "cpa_14d": null,
       "avg_roas_14d": 0.0,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
+      "ph_appts": 5,
+      "ph_forms": 0,
+      "ph_purchases": 0,
       "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
+      "funnel_forms_per_appt": 0.0,
       "funnel_purchases_per_form": null
     },
     {
@@ -187,12 +187,12 @@
       "purchases_14d": 52.93,
       "cpa_14d": 35.31,
       "avg_roas_14d": 8.76,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
-      "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "ph_appts": 104,
+      "ph_forms": 16,
+      "ph_purchases": 22,
+      "funnel_appts_per_click": 7.0,
+      "funnel_forms_per_appt": 15.4,
+      "funnel_purchases_per_form": 137.5
     },
     {
       "campaign": "Search_CA_Treatments_tCPA [NB]",
@@ -214,12 +214,12 @@
       "purchases_14d": 18.86,
       "cpa_14d": 352.55,
       "avg_roas_14d": 0.75,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
-      "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "ph_appts": 37,
+      "ph_forms": 14,
+      "ph_purchases": 5,
+      "funnel_appts_per_click": 3.1,
+      "funnel_forms_per_appt": 37.8,
+      "funnel_purchases_per_form": 35.7
     },
     {
       "campaign": "Search_ON_AB_Clinic_tCPA [NB]",
@@ -241,12 +241,12 @@
       "purchases_14d": 2.0,
       "cpa_14d": 380.12,
       "avg_roas_14d": 0.39,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
-      "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "ph_appts": 22,
+      "ph_forms": 2,
+      "ph_purchases": 1,
+      "funnel_appts_per_click": 15.2,
+      "funnel_forms_per_appt": 9.1,
+      "funnel_purchases_per_form": 50.0
     },
     {
       "campaign": "Search_ON_Menopause_clinic_tCPA [NB]",
@@ -268,12 +268,12 @@
       "purchases_14d": 7.49,
       "cpa_14d": 431.36,
       "avg_roas_14d": 0.68,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
-      "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "ph_appts": 6,
+      "ph_forms": 2,
+      "ph_purchases": 1,
+      "funnel_appts_per_click": 0.7,
+      "funnel_forms_per_appt": 33.3,
+      "funnel_purchases_per_form": 50.0
     },
     {
       "campaign": "Search_QC_FR_Clinique_Hormonotherapie_tCPA [NB]",
@@ -295,12 +295,12 @@
       "purchases_14d": 12.85,
       "cpa_14d": 186.28,
       "avg_roas_14d": 1.46,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
-      "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "ph_appts": 73,
+      "ph_forms": 20,
+      "ph_purchases": 12,
+      "funnel_appts_per_click": 16.4,
+      "funnel_forms_per_appt": 27.4,
+      "funnel_purchases_per_form": 60.0
     },
     {
       "campaign": "Search_QC_FR_Treatments_tCPA [NB]",
@@ -322,12 +322,12 @@
       "purchases_14d": 6.87,
       "cpa_14d": 406.14,
       "avg_roas_14d": 0.73,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
+      "ph_appts": 3,
+      "ph_forms": 1,
+      "ph_purchases": 0,
       "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "funnel_forms_per_appt": 33.3,
+      "funnel_purchases_per_form": 0.0
     },
     {
       "campaign": "Search_QC_FR_Treatments_tCPA_Portfolio_bid_Account_default [NB]",
@@ -349,12 +349,12 @@
       "purchases_14d": 7.0,
       "cpa_14d": 494.05,
       "avg_roas_14d": 0.83,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
-      "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "ph_appts": 17,
+      "ph_forms": 8,
+      "ph_purchases": 4,
+      "funnel_appts_per_click": 3.4,
+      "funnel_forms_per_appt": 47.1,
+      "funnel_purchases_per_form": 50.0
     },
     {
       "campaign": "[NB] QC_FR | Treatments | tIS",
@@ -376,12 +376,12 @@
       "purchases_14d": 0,
       "cpa_14d": null,
       "avg_roas_14d": 0.0,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
+      "ph_appts": 55,
+      "ph_forms": 11,
+      "ph_purchases": 4,
       "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "funnel_forms_per_appt": 20.0,
+      "funnel_purchases_per_form": 36.4
     },
     {
       "campaign": "[PMax] CA | Treatments | Max conversions",
@@ -403,12 +403,12 @@
       "purchases_14d": 25.19,
       "cpa_14d": 190.71,
       "avg_roas_14d": 1.46,
-      "ph_appts": null,
-      "ph_forms": null,
-      "ph_purchases": null,
+      "ph_appts": 81,
+      "ph_forms": 19,
+      "ph_purchases": 5,
       "funnel_appts_per_click": null,
-      "funnel_forms_per_appt": null,
-      "funnel_purchases_per_form": null
+      "funnel_forms_per_appt": 23.5,
+      "funnel_purchases_per_form": 26.3
     }
   ],
   "daily": [
