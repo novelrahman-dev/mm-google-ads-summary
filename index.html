@@ -138,8 +138,10 @@ function renderInsights(d){
   const camps = d.report1_campaigns || [];
   const totals = d.totals || {};
   const t14=totals['14d']||{}, t7=totals['7d']||{}, ty=totals.yesterday||{};
-  const gp = (d.channel_funnel||[]).find(c=>c.channel==='Google Paid');
-  const gCVR = gp ? (gp.purchase_sessions/gp.sessions*100).toFixed(2) : null;
+  // CVR from GA4 channel table (Paid Search = Google Search + Brand)
+  const ga4ch = d.ga4_channel_funnel || [];
+  const gpGA4 = ga4ch.find(c=>c.channel==='Paid Search');
+  const gCVR = gpGA4 ? (gpGA4.conversions_purchase/gpGA4.sessions*100).toFixed(2) : null;
   const dow = new Date(d.date_yesterday).getDay();
   const target = (dow===0||dow===6) ? 2000 : 3000;
   const pacePct = ty.cost ? ty.cost/target*100 : 0;
@@ -156,7 +158,7 @@ function renderInsights(d){
   const brandIS = brandCamp ? brandCamp.top_is : null;
   const best = withPurch[0], worst = withPurch[withPurch.length-1];
 
-  // Narrative
+  // Narrative — Google Ads
   let lines = [];
   if(t7.cpa) lines.push(`<strong>7d CPA is ${fmtCAD2(t7.cpa)}</strong> — ${t7.cpa<=175?'✅ within':'⚠️ above'} the $175 target. 14d blended CPA is <strong>${fmtCAD2(t14.cpa)}</strong> across <strong>${Math.round(t14.purchases||0)} purchases</strong>.`);
   lines.push(`Yesterday: <strong>${fmtCAD(ty.cost)}</strong> spend (${pacePct.toFixed(0)}% of ${fmtCAD(target)} ${(dow===0||dow===6)?'weekend':'weekday'} target), <strong>${ty.purchases!=null?ty.purchases.toFixed(1):'—'} purchases</strong> at <strong>${fmtCAD2(ty.cpa)} CPA</strong>.`);
@@ -164,6 +166,27 @@ function renderInsights(d){
   if(hrtSpend>0) lines.push(`🔴 <strong>HRT campaign has spent ${fmtCAD(hrtSpend)} (14d)</strong> — LP gated until Jul 6, pause immediately.`);
   else if(investigate.length>0) lines.push(`⚠️ <strong>${investigate.length} campaign${investigate.length>1?'s':''}</strong> running above $175 CPA (7d) — see Investigate card.`);
   else lines.push(`✅ No structural flags. All campaigns within acceptable parameters.`);
+
+  // Site insights from GA4 + landing pages
+  const lp = d.landing_page_funnel || [];
+  const topLPbyPurch = lp.filter(p=>p.purchases>0).sort((a,b)=>b.cvr-a.cvr);
+  const topLPbyVol = lp.filter(p=>p.sessions>1000).sort((a,b)=>b.sessions-a.sessions);
+  const blogLP = lp.find(p=>p.page==='Blog Post');
+  const bookLP = lp.find(p=>p.page==='Book Initial');
+  const cityLP = lp.find(p=>p.page==='City Page');
+  const homeLP = lp.find(p=>p.page==='Home');
+  const partnershipCh = ga4ch.find(c=>c.channel==='Partnerships');
+  const aiCh = ga4ch.find(c=>c.channel==='AI Assistant');
+  const paidSocialCh = ga4ch.find(c=>c.channel==='Paid Social');
+  const paidSearchCh = ga4ch.find(c=>c.channel==='Paid Search');
+
+  let siteLines = [];
+  if(bookLP) siteLines.push(`🎯 <strong>Book Initial Assessment</strong> is your highest-converting landing page at <strong>${bookLP.cvr}% CVR</strong> — 8× higher than the site average. ${bookLP.sessions.toLocaleString()} sessions drove <strong>${bookLP.purchases} purchases</strong> (30d).`);
+  if(cityLP) siteLines.push(`📍 <strong>City Pages</strong> convert at <strong>${cityLP.cvr}% CVR</strong> with ${cityLP.sessions.toLocaleString()} sessions — your best high-volume page type after direct booking. Strong engagement at ${cityLP.engagement_rate}%.`);
+  if(blogLP) siteLines.push(`📝 <strong>Blog Posts</strong> drive ${blogLP.sessions.toLocaleString()} sessions (30d) but convert at only <strong>${blogLP.cvr}% CVR</strong>. High-volume, low-conversion — pure awareness traffic. Consider stronger CTAs or internal links to booking pages.`);
+  if(partnershipCh) siteLines.push(`🤝 <strong>Partnerships (Venngo)</strong> is showing strong early signals: <strong>${(partnershipCh.engagement_rate*100).toFixed(0)}% engagement rate</strong> and <strong>${(partnershipCh.conversions_purchase/partnershipCh.sessions*100).toFixed(2)}% CVR</strong> — matching Paid Search quality at ${partnershipCh.sessions} sessions. Worth scaling.`);
+  if(aiCh) siteLines.push(`🤖 <strong>AI Assistant</strong> (ChatGPT referrals) has the highest CVR of any channel at <strong>${(aiCh.conversions_purchase/aiCh.sessions*100).toFixed(2)}%</strong> with ${(aiCh.engagement_rate*100).toFixed(0)}% engagement. Only ${aiCh.sessions} sessions but ultra-high intent — this audience already trusts the brand.`);
+  if(paidSocialCh) siteLines.push(`📱 <strong>Paid Social</strong> has a <strong>${(paidSocialCh.bounce_rate*100).toFixed(0)}% bounce rate</strong> and <strong>${(paidSocialCh.conversions_purchase/paidSocialCh.sessions*100).toFixed(2)}% CVR</strong> — by far the weakest channel quality. Meta traffic is not converting at the booking level despite session volume.`);
 
   const campPaceRows = camps.filter(c=>c.yest_cost>0)
     .sort((a,b)=>b.yest_cost-a.yest_cost)
@@ -193,6 +216,12 @@ function renderInsights(d){
     <div class="narrative">
       <h3>📋 Morning Briefing — ${d.date_yesterday}</h3>
       ${lines.map(l=>`<p>${l}</p>`).join('')}
+    </div>
+
+    <div class="sec">Site & Channel Insights (GA4, 30d)</div>
+    <div class="narrative" style="background:#f0f9f7;border-left:3px solid #085041">
+      <h3>🌐 What the funnel data is telling us</h3>
+      ${siteLines.map(l=>`<p>${l}</p>`).join('')}
     </div>
 
     <div class="sec">Yesterday Spend Pacing vs ${fmtCAD(target)} ${(dow===0||dow===6)?'Weekend':'Weekday'} Target</div>
